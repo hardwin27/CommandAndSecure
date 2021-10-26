@@ -6,24 +6,11 @@ using UnityEditor.Tilemaps;
 
 public class GridController : MonoBehaviour
 {
-    //Temporary Map Data
-    private char[,] mapData = new char[10, 10] {
-        {'#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O' },
-        {'#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O' },
-        {'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O' },
-        {'#', '#', 'O', 'O', '#', '#', '#', 'O', 'O', 'O' },
-        {'#', '#', 'O', 'O', '#', '#', '#', 'O', 'O', 'O' },
-        {'#', '#', 'O', 'O', '#', '#', '#', '#', '#', '#' },
-        {'#', '#', 'O', 'O', '#', '#', '#', '#', '#', '#' },
-        {'O', 'O', 'O', 'O', '#', '#', '#', 'O', 'O', 'O' },
-        {'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O' },
-        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
-    };
-
     private Grid grid;
     [SerializeField] GameObject tilemap;
-    [SerializeField] PrefabBrush lowgroundBrush;
-    [SerializeField] PrefabBrush highgroundBrush;
+    [SerializeField] PrefabBrush lowgroundTileBrush;
+    [SerializeField] PrefabBrush highgroundTileBrush;
+    [SerializeField] PrefabBrush commanderTileBrush;
 
     private void Awake()
     {
@@ -44,18 +31,25 @@ public class GridController : MonoBehaviour
         {
             for (int indY = 0; indY < 10; indY++)
             {
-                if (mapData[indX, indY] == '#')
+                if (GameManager.Instance.mapData[indX, indY] == '#')
                 {
-                    highgroundBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                    highgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                }
+                else if(GameManager.Instance.mapData[indX, indY] == 'V')
+                {
+                    commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                    GameManager.Instance.SetCommanderPosition(new Vector3(startX, startY, 0));
                 }
                 else
                 {
-                    lowgroundBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                    lowgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                 }
                 startX += 1f;
             }
             startX = -4.5f;
             startY -= 1f;
         }
+
+        tilemap.GetComponent<TilemapController>().AddTilesToArray();
     }
 }
