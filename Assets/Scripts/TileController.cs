@@ -8,9 +8,13 @@ public class TileController : MonoBehaviour
 
     protected int distance;
     protected Vector2 direction;
+    protected TileController cameFrom;
 
     protected bool isLowground;
     protected bool isCommanderTile = false;
+
+    //Mark used for the gridbased pathfinding
+    protected bool mark = false;
 
     protected virtual void Awake()
     {
@@ -20,6 +24,11 @@ public class TileController : MonoBehaviour
     protected virtual void Start()
     {
         
+    }
+
+    protected virtual void OnMouseDown()
+    {
+        print(distance);
     }
 
     public void AddNeighbor(TileController tileController)
@@ -35,5 +44,40 @@ public class TileController : MonoBehaviour
     public bool GetIsCommanderTile()
     {
         return isCommanderTile;
+    }
+
+    public bool GetIsLowground()
+    {
+        return isLowground;
+    }
+
+    public void SetDistance(int value)
+    {
+        distance = value;
+    }
+
+    public int GetDistance()
+    {
+        return distance;
+    }
+
+    public void SetDirection(Vector2 value)
+    {
+        direction = value;
+    }
+
+    public Vector2 GetDirection()
+    {
+        return direction;
+    }
+
+    public void SetMark(bool value)
+    {
+        mark = value;
+    }
+
+    public bool GetMark()
+    {
+        return mark;
     }
 }

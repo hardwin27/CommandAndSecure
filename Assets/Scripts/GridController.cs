@@ -38,7 +38,7 @@ public class GridController : MonoBehaviour
                 else if(GameManager.Instance.mapData[indX, indY] == 'V')
                 {
                     commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
-                    GameManager.Instance.SetCommanderPosition(new Vector3(startX, startY, 0));
+                    GameManager.Instance.SetCommanderPositionAndIndex(new Vector3(startX, startY, 0), new Vector2Int(indY, indX));
                 }
                 else
                 {

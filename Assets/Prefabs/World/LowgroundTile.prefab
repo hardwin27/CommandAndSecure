@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6769440599698963978}
   - component: {fileID: 2865036161126648449}
   - component: {fileID: 5661830213514546625}
+  - component: {fileID: 622057038077101488}
   m_Layer: 0
   m_Name: LowgroundTile
   m_TagString: Untagged
@@ -95,3 +96,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4a41baafcfdfe429635b564721b063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &622057038077101488
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631882346082785958}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
