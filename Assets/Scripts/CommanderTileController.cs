@@ -15,4 +15,9 @@ public class CommanderTileController : TileController
     {
         
     }
+
+    protected override void OnMouseDown()
+    {
+        base.OnMouseDown();
+    }
 }

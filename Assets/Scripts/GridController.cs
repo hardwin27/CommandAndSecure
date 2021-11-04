@@ -190,8 +190,9 @@ public class GridController : MonoBehaviour
                             distanceDown = tileControllers[indX, indY + 1].GetDistance() - tileControllers[indX, indY].GetDistance();
                         }
                     }
-
+                    
                     tileControllers[indX, indY].SetDirection(new Vector3(distanceLeft - distanceRight, distanceDown - distanceUp, 0f).normalized);
+                    
                 }
             }
         }

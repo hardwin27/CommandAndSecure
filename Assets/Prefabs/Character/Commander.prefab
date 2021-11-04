@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 692527155423961280}
   - component: {fileID: 7642239552423924028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Commander
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 69f5e4e024105004d99feeaa62dd1783, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

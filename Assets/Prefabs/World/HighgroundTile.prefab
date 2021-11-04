@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6769440599698963978}
   - component: {fileID: 2865036161126648449}
   - component: {fileID: 5083567187393065584}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HighgroundTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

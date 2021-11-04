@@ -6,8 +6,8 @@ public class TileController : MonoBehaviour
 {
     protected List<TileController> neighbors = new List<TileController>();
 
-    protected int distance;
-    protected Vector3 direction;
+    protected int distance = 0;
+    protected Vector3 direction = Vector3.zero;
     protected TileController cameFrom;
 
     protected bool isLowground;
@@ -28,6 +28,7 @@ public class TileController : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
+        print("TEST");
         print(direction);
         print(distance);
     }
