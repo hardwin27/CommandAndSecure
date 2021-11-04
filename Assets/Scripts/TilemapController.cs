@@ -34,18 +34,22 @@ public class TilemapController : MonoBehaviour
             {
                 if (indX > 0)
                 {
+                    //left
                     tileControllers[indX, indY].AddNeighbor(tileControllers[indX - 1, indY]);
                 }
                 if (indX < 10 - 1)
                 {
+                    //right
                     tileControllers[indX, indY].AddNeighbor(tileControllers[indX + 1, indY]);
                 }
                 if (indY > 0)
                 {
+                    //up
                     tileControllers[indX, indY].AddNeighbor(tileControllers[indX, indY - 1]);
                 }
                 if (indY < 10 - 1)
                 {
+                    //down
                     tileControllers[indX, indY].AddNeighbor(tileControllers[indX, indY + 1]);
                 }
             }
@@ -54,8 +58,8 @@ public class TilemapController : MonoBehaviour
 
     private void GoalbasedPathfinding()
     {
-
         GenerateHeatmap();
+        GenerateFlowField();
     }
 
     public void GenerateHeatmap()
@@ -99,6 +103,57 @@ public class TilemapController : MonoBehaviour
 
     public void GenerateFlowField()
     {
+        for (int indX = 0; indX < 10; indX++)
+        {
+            for (int indY = 0; indY < 10; indY++)
+            {
+                print(tileControllers[indX, indY].transform.position);
+                float distanceLeft = 1f;
+                float distanceRight = 1f;
+                float distanceUp = 1f;
+                float distanceDown = 1f;
+                if(tileControllers[indX, indY].GetIsCommanderTile())
+                {
+                    print("Commander at " + indX.ToString() + " " + indY.ToString());
+                }
+                if (tileControllers[indX, indY].GetIsLowground())
+                {
+                    if (indX > 0)
+                    {
+                        //left
+                        if(tileControllers[indX - 1, indY].GetIsLowground())
+                        {
+                            distanceLeft = tileControllers[indX - 1, indY].GetDistance() - tileControllers[indX, indY].GetDistance();
+                        }
+                    }
+                    if (indX < 10 - 1)
+                    {
+                        //right
+                        if (tileControllers[indX + 1, indY].GetIsLowground())
+                        {
+                            distanceRight = tileControllers[indX + 1, indY].GetDistance() - tileControllers[indX, indY].GetDistance();
+                        }
+                    }
+                    if (indY > 0)
+                    {
+                        //up
+                        if (tileControllers[indX, indY - 1].GetIsLowground())
+                        {
+                            distanceUp = tileControllers[indX, indY - 1].GetDistance() - tileControllers[indX, indY].GetDistance();
+                        }
+                    }
+                    if (indY < 10 - 1)
+                    {
+                        //down
+                        if (tileControllers[indX, indY + 1].GetIsLowground())
+                        {
+                            distanceDown = tileControllers[indX, indY + 1].GetDistance() - tileControllers[indX, indY].GetDistance();
+                        }
+                    }
 
+                    tileControllers[indX, indY].SetDirection(new Vector3(distanceLeft - distanceRight, distanceDown - distanceUp, 0f).normalized);
+                }
+            }
+        }
     }
 }

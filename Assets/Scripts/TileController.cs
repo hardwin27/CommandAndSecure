@@ -7,7 +7,7 @@ public class TileController : MonoBehaviour
     protected List<TileController> neighbors = new List<TileController>();
 
     protected int distance;
-    protected Vector2 direction;
+    protected Vector3 direction;
     protected TileController cameFrom;
 
     protected bool isLowground;
@@ -28,6 +28,7 @@ public class TileController : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
+        print(direction);
         print(distance);
     }
 
@@ -61,12 +62,24 @@ public class TileController : MonoBehaviour
         return distance;
     }
 
-    public void SetDirection(Vector2 value)
+    public void SetDirection(Vector3 value)
     {
+        if(Mathf.Abs(value.x) > Mathf.Abs(value.y))
+        {
+            value = new Vector3(value.x / Mathf.Abs(value.x), 0f, 0f);
+        }
+        else if (Mathf.Abs(value.x) < Mathf.Abs(value.y))
+        {
+            value = new Vector3(0f, value.y / Mathf.Abs(value.y), 0f);
+        }
+        else
+        {
+            value = new Vector3(value.x / Mathf.Abs(value.x), value.y / Mathf.Abs(value.y), 0f);
+        }
         direction = value;
     }
 
-    public Vector2 GetDirection()
+    public Vector3 GetDirection()
     {
         return direction;
     }
@@ -79,5 +92,12 @@ public class TileController : MonoBehaviour
     public bool GetMark()
     {
         return mark;
+    }
+
+    //for debugging
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + direction);
     }
 }
