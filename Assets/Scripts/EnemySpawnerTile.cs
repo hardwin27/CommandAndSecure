@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LowgroundTile : Tile
+public class EnemySpawnerTile : Tile
 {
     protected override void Awake()
     {
@@ -13,6 +12,11 @@ public class LowgroundTile : Tile
 
     protected override void Start()
     {
-        
+
+    }
+
+    public void SpawnEnemy(GameObject enemyPrefab, Transform parent)
+    {
+        Instantiate(enemyPrefab, transform.position, Quaternion.identity, parent);
     }
 }

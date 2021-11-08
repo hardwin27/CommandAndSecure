@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class EnemyTileDetector : MonoBehaviour
 {
+    [SerializeField] private Enemy parent;
+
+    Collider2D detectedCollider;
     private Vector3 detectedDirection = Vector3.zero;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Tile detectedTile = collision.gameObject.GetComponent<Tile>();
-        if(!detectedTile.GetIsCommanderTile())
+        if(detectedCollider != collision)
         {
-            detectedDirection = detectedTile.GetDirection();
+            detectedCollider = collision;
+            Tile detectedTile = detectedCollider.gameObject.GetComponent<Tile>();
+            if (!detectedTile.GetIsCommanderTile())
+            {
+                detectedDirection = detectedTile.GetDirection();
+                parent.SetNewTileTarget(detectedCollider.transform.position);
+            }
         }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)

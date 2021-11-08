@@ -11,8 +11,10 @@ public class GridManager : MonoBehaviour
     [SerializeField] PrefabBrush lowgroundTileBrush;
     [SerializeField] PrefabBrush highgroundTileBrush;
     [SerializeField] PrefabBrush commanderTileBrush;
+    [SerializeField] PrefabBrush enemySpawnereTileBrush;
 
     private Tile[,] tiles = new Tile[10, 10];
+    private List<EnemySpawnerTile> enemySpawnerTiles = new List<EnemySpawnerTile>();
 
     private void Awake()
     {
@@ -23,6 +25,10 @@ public class GridManager : MonoBehaviour
     {
         LoadMap();
         AddTilesToArray();
+        AddEnemySpawnerTileToList();
+        InitiateCurrentCommanderTile();
+        InitiateNeighborsForTiles();
+        GoalbasedPathfinding();
     }
 
     private void LoadMap()
@@ -34,18 +40,25 @@ public class GridManager : MonoBehaviour
         {
             for (int indY = 0; indY < 10; indY++)
             {
-                if (GameManager.Instance.mapData[indX, indY] == '#')
+                switch(GameManager.Instance.mapData[indX, indY])
                 {
-                    highgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
-                }
-                else if(GameManager.Instance.mapData[indX, indY] == 'V')
-                {
-                    commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
-                    GameManager.Instance.SetCommanderPositionAndIndex(new Vector3(startX, startY, 0), new Vector2Int(indY, indX));
-                }
-                else
-                {
-                    lowgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                    case '#':
+                        highgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                        break;
+                    case 'X':
+                        enemySpawnereTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                        GameManager.Instance.enemySpawnTileIndexs.Add(new Vector2Int(indY, indX));
+                        break;
+                    case 'U':
+                        commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                        break;
+                    case 'V':
+                        commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                        GameManager.Instance.SetCommanderPositionAndIndex(new Vector3(startX, startY, 0), new Vector2Int(indY, indX));
+                        break;
+                    default:
+                        lowgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                        break;
                 }
                 startX += 1f;
             }
@@ -61,6 +74,7 @@ public class GridManager : MonoBehaviour
         foreach (Transform child in tilemap.transform)
         {
             Tile tempTile = child.GetComponent<Tile>();
+
             tiles[counterX, counterY] = tempTile;
             counterX++;
             if (counterX >= 10)
@@ -69,9 +83,32 @@ public class GridManager : MonoBehaviour
                 counterY++;
             }
         }
+    }
 
-        InitiateNeighborsForTiles();
-        GoalbasedPathfinding();
+    private void AddEnemySpawnerTileToList()
+    {
+        foreach(Vector2Int index in GameManager.Instance.enemySpawnTileIndexs)
+        {
+            try
+            {
+                enemySpawnerTiles.Add(tiles[index.x, index.y].gameObject.GetComponent<EnemySpawnerTile>());
+            }
+            catch
+            {
+                continue;
+            }
+        }
+    }
+
+    private void InitiateCurrentCommanderTile()
+    {
+        Vector2Int commanderIndex = GameManager.Instance.GetCommanderIndex();
+        tiles[commanderIndex.x, commanderIndex.y].GetComponent<CommanderTile>().SetIsCurrentCommanderPosition(true);
+    }
+
+    public List<EnemySpawnerTile> GetEnemySpawnTiles()
+    {
+        return enemySpawnerTiles;
     }
 
     private void InitiateNeighborsForTiles()

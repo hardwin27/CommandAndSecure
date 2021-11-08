@@ -13,10 +13,18 @@ public class Enemy : MonoBehaviour
     private Vector2 moveDirection;
 
     [SerializeField] private EnemyTileDetector tileDetector;
+    private bool isWalkToTile;
+    private Vector3 tilePosition;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        isWalkToTile = false;
+        tilePosition = transform.position;
     }
 
     private void Update()
@@ -31,9 +39,21 @@ public class Enemy : MonoBehaviour
 
     private void RotateCharacter()
     {
-        lookDirection = tileDetector.GetDetectedDirection();
+        if(Vector3.Distance(transform.position, tilePosition) < 0.1f)
+        {
+            isWalkToTile = false;
+        }
 
-        if(lookDirection != Vector3.zero)
+        if(isWalkToTile)
+        {
+            lookDirection = tilePosition - transform.position;
+        }
+        else
+        {
+            lookDirection = tileDetector.GetDetectedDirection();
+        }
+
+        if (lookDirection != Vector3.zero)
         {
             angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
             body.rotation = angle;
@@ -46,5 +66,11 @@ public class Enemy : MonoBehaviour
     private void MoveCharacter()
     {
         body.MovePosition((Vector2)transform.position + (moveDirection * moveSpeed * Time.fixedDeltaTime));
+    }
+
+    public void SetNewTileTarget(Vector3 pos)
+    {
+        isWalkToTile = true;
+        tilePosition = pos;
     }
 }

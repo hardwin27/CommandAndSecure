@@ -26,11 +26,14 @@ public class Tile : MonoBehaviour
         
     }
 
+    protected virtual void Update()
+    {
+
+    }
+
     protected virtual void OnMouseDown()
     {
-        print("TEST");
-        print(direction);
-        print(distance);
+
     }
 
     public void AddNeighbor(Tile Tile)
