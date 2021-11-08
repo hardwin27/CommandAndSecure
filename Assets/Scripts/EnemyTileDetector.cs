@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTileDetectorController : MonoBehaviour
+public class EnemyTileDetector : MonoBehaviour
 {
     private Vector3 detectedDirection = Vector3.zero;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        TileController detectedTile = collision.gameObject.GetComponent<TileController>();
+        Tile detectedTile = collision.gameObject.GetComponent<Tile>();
         if(!detectedTile.GetIsCommanderTile())
         {
             detectedDirection = detectedTile.GetDirection();

@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommanderTileController : TileController
+public class HighgroundTile : Tile
 {
     protected override void Awake()
     {
         base.Awake();
-        isLowground = true;
-        isCommanderTile = true;
+        isLowground = false;
     }
 
     protected override void Start()
     {
         
-    }
-
-    protected override void OnMouseDown()
-    {
-        base.OnMouseDown();
     }
 }

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileController : MonoBehaviour
+public class Tile : MonoBehaviour
 {
-    protected List<TileController> neighbors = new List<TileController>();
+    protected List<Tile> neighbors = new List<Tile>();
 
     protected int distance = 0;
     protected Vector3 direction = Vector3.zero;
-    protected TileController cameFrom;
+    protected Tile cameFrom;
 
     protected bool isLowground;
     protected bool isCommanderTile = false;
@@ -33,12 +33,12 @@ public class TileController : MonoBehaviour
         print(distance);
     }
 
-    public void AddNeighbor(TileController tileController)
+    public void AddNeighbor(Tile Tile)
     {
-        neighbors.Add(tileController);
+        neighbors.Add(Tile);
     }
 
-    public List<TileController> GetNeighbors()
+    public List<Tile> GetNeighbors()
     {
         return neighbors;
     }

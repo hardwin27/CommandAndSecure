@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEditor.Tilemaps;
 
-public class GridController : MonoBehaviour
+public class GridManager : MonoBehaviour
 {
     private Grid grid;
     [SerializeField] GameObject tilemap;
@@ -12,7 +12,7 @@ public class GridController : MonoBehaviour
     [SerializeField] PrefabBrush highgroundTileBrush;
     [SerializeField] PrefabBrush commanderTileBrush;
 
-    private TileController[,] tileControllers = new TileController[10, 10];
+    private Tile[,] tiles = new Tile[10, 10];
 
     private void Awake()
     {
@@ -60,8 +60,8 @@ public class GridController : MonoBehaviour
         int counterY = 0;
         foreach (Transform child in tilemap.transform)
         {
-            TileController tempTileController = child.GetComponent<TileController>();
-            tileControllers[counterX, counterY] = tempTileController;
+            Tile tempTile = child.GetComponent<Tile>();
+            tiles[counterX, counterY] = tempTile;
             counterX++;
             if (counterX >= 10)
             {
@@ -83,22 +83,22 @@ public class GridController : MonoBehaviour
                 if (indX > 0)
                 {
                     //left
-                    tileControllers[indX, indY].AddNeighbor(tileControllers[indX - 1, indY]);
+                    tiles[indX, indY].AddNeighbor(tiles[indX - 1, indY]);
                 }
                 if (indX < 10 - 1)
                 {
                     //right
-                    tileControllers[indX, indY].AddNeighbor(tileControllers[indX + 1, indY]);
+                    tiles[indX, indY].AddNeighbor(tiles[indX + 1, indY]);
                 }
                 if (indY > 0)
                 {
                     //up
-                    tileControllers[indX, indY].AddNeighbor(tileControllers[indX, indY - 1]);
+                    tiles[indX, indY].AddNeighbor(tiles[indX, indY - 1]);
                 }
                 if (indY < 10 - 1)
                 {
                     //down
-                    tileControllers[indX, indY].AddNeighbor(tileControllers[indX, indY + 1]);
+                    tiles[indX, indY].AddNeighbor(tiles[indX, indY + 1]);
                 }
             }
         }
@@ -116,27 +116,27 @@ public class GridController : MonoBehaviour
         {
             for (int indY = 0; indY < 10; indY++)
             {
-                tileControllers[indX, indY].SetMark(false);
+                tiles[indX, indY].SetMark(false);
             }
         }
         Vector2Int commanderIndex = GameManager.Instance.GetCommanderIndex();
-        tileControllers[commanderIndex.x, commanderIndex.y].SetMark(true);
-        tileControllers[commanderIndex.x, commanderIndex.y].SetDistance(0);
-        Queue<TileController> queue = new Queue<TileController>();
-        queue.Enqueue(tileControllers[commanderIndex.x, commanderIndex.y]);
+        tiles[commanderIndex.x, commanderIndex.y].SetMark(true);
+        tiles[commanderIndex.x, commanderIndex.y].SetDistance(0);
+        Queue<Tile> queue = new Queue<Tile>();
+        queue.Enqueue(tiles[commanderIndex.x, commanderIndex.y]);
         while (queue.Count != 0)
         {
-            TileController currentTileController = queue.Dequeue();
-            List<TileController> currentNeighbors = currentTileController.GetNeighbors();
+            Tile currentTile = queue.Dequeue();
+            List<Tile> currentNeighbors = currentTile.GetNeighbors();
             if (currentNeighbors.FindIndex(t => t.GetIsLowground()) != -1)
             {
-                foreach (TileController neighbor in currentNeighbors)
+                foreach (Tile neighbor in currentNeighbors)
                 {
                     if (!neighbor.GetMark())
                     {
                         if (neighbor.GetIsLowground())
                         {
-                            neighbor.SetDistance(currentTileController.GetDistance() + 1);
+                            neighbor.SetDistance(currentTile.GetDistance() + 1);
                             neighbor.SetMark(true);
                             queue.Enqueue(neighbor);
                         }
@@ -156,42 +156,42 @@ public class GridController : MonoBehaviour
                 float distanceRight = 1f;
                 float distanceUp = 1f;
                 float distanceDown = 1f;
-                if (tileControllers[indX, indY].GetIsLowground())
+                if (tiles[indX, indY].GetIsLowground())
                 {
                     if (indX > 0)
                     {
                         //left
-                        if (tileControllers[indX - 1, indY].GetIsLowground())
+                        if (tiles[indX - 1, indY].GetIsLowground())
                         {
-                            distanceLeft = tileControllers[indX - 1, indY].GetDistance() - tileControllers[indX, indY].GetDistance();
+                            distanceLeft = tiles[indX - 1, indY].GetDistance() - tiles[indX, indY].GetDistance();
                         }
                     }
                     if (indX < 10 - 1)
                     {
                         //right
-                        if (tileControllers[indX + 1, indY].GetIsLowground())
+                        if (tiles[indX + 1, indY].GetIsLowground())
                         {
-                            distanceRight = tileControllers[indX + 1, indY].GetDistance() - tileControllers[indX, indY].GetDistance();
+                            distanceRight = tiles[indX + 1, indY].GetDistance() - tiles[indX, indY].GetDistance();
                         }
                     }
                     if (indY > 0)
                     {
                         //up
-                        if (tileControllers[indX, indY - 1].GetIsLowground())
+                        if (tiles[indX, indY - 1].GetIsLowground())
                         {
-                            distanceUp = tileControllers[indX, indY - 1].GetDistance() - tileControllers[indX, indY].GetDistance();
+                            distanceUp = tiles[indX, indY - 1].GetDistance() - tiles[indX, indY].GetDistance();
                         }
                     }
                     if (indY < 10 - 1)
                     {
                         //down
-                        if (tileControllers[indX, indY + 1].GetIsLowground())
+                        if (tiles[indX, indY + 1].GetIsLowground())
                         {
-                            distanceDown = tileControllers[indX, indY + 1].GetDistance() - tileControllers[indX, indY].GetDistance();
+                            distanceDown = tiles[indX, indY + 1].GetDistance() - tiles[indX, indY].GetDistance();
                         }
                     }
                     
-                    tileControllers[indX, indY].SetDirection(new Vector3(distanceLeft - distanceRight, distanceDown - distanceUp, 0f).normalized);
+                    tiles[indX, indY].SetDirection(new Vector3(distanceLeft - distanceRight, distanceDown - distanceUp, 0f).normalized);
                     
                 }
             }

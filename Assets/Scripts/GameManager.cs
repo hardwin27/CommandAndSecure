@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
     };
     
-    [SerializeField] private CommanderController commander;
+    [SerializeField] private Commander commander;
     private Vector3 commanderPosition = new Vector3(0f, 0f, 0f);
     //Index reference the position of commander in the Tilemap
     private Vector2Int commanderIndex = Vector2Int.zero;

@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LowgroundTileController : TileController
+public class CommanderTile : Tile
 {
-    /*[SerializeField] private Canvas canvas;*/
-
     protected override void Awake()
     {
         base.Awake();
         isLowground = true;
-
-        /*canvas.worldCamera = Camera.main;*/
+        isCommanderTile = true;
     }
 
     protected override void Start()
