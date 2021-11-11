@@ -41,4 +41,33 @@ public class GameManager : MonoBehaviour
     };
 
     public List<Vector2Int> enemySpawnTileIndexs = new List<Vector2Int>();
+
+    //UI Related Variable
+    [SerializeField] private Transform agentUIParent;
+    [SerializeField] private GameObject agentUIPrefab;
+
+    [SerializeField] private Agent[] agents;
+    [SerializeField] private Transform agentParent;
+
+    private void Start()
+    {
+        InstantiateAllAgentUI();
+    }
+
+    private void InstantiateAllAgentUI()
+    {
+        foreach (Agent agent in agents)
+        {
+            GameObject newAgentObj = Instantiate(agentUIPrefab.gameObject, agentUIParent);
+            AgentUI newAgentUI = newAgentObj.GetComponent<AgentUI>();
+
+            newAgentUI.SetAgent(agent);
+            newAgentUI.transform.name = agent.name;
+        }
+    }
+
+    public Transform GetAgentParent()
+    {
+        return agentParent;
+    }
 }

@@ -15,7 +15,7 @@ TagManager:
   - Agent
   - Enemy
   - EnemyTileDetector
-  - AgentProjectile
+  - AgentAttack
   - 
   - 
   - 

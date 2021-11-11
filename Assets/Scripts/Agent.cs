@@ -6,7 +6,9 @@ public class Agent : MonoBehaviour
 {
     private Rigidbody2D body;
 
-    private List<Transform> detectedEnemies = new List<Transform>();
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    public List<Transform> detectedEnemies = new List<Transform>();
     private Vector3 lookDirection;
 
     [SerializeField] private Transform firePoint;
@@ -15,6 +17,8 @@ public class Agent : MonoBehaviour
     [SerializeField] private float projectileSpeed = 5;
     [SerializeField] private float projectileDamage = 2;
     private float shootTimer;
+
+    public Vector2? placedPosition { get; private set; }
 
     private void Awake()
     {
@@ -30,25 +34,12 @@ public class Agent : MonoBehaviour
     private void Update()
     {
         Shoot();
+        print(placedPosition);
     }
 
     private void FixedUpdate()
     {
         RotateAgents();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        detectedEnemies.Add(collision.transform);
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Transform temp = collision.transform;
-        if (detectedEnemies.FindIndex(t => t == temp) != -1)
-        {
-            detectedEnemies.Remove(temp);
-        }
     }
 
     private void RotateAgents()
@@ -83,5 +74,26 @@ public class Agent : MonoBehaviour
                 projectile.GetComponent<Projectile>().SetProperty(detectedEnemies[0].transform, projectileSpeed, projectileDamage);
             }
         }
+    }
+
+    public Sprite GetAgentIcon()
+    {
+        return spriteRenderer.sprite;
+    }
+
+    public void SetPlacedPosition(Vector2? newPosition)
+    {
+        placedPosition = newPosition;
+    }
+
+    public void LockPlacement()
+    {
+        transform.position = (Vector2)placedPosition;
+    }
+
+    public void ToggleOrderInLayer(bool toFront)
+    {
+        int order = toFront ? 2 : 1;
+        spriteRenderer.sortingOrder = order;
     }
 }
