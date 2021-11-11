@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour
 {
     private Rigidbody2D body;
 
+    [SerializeField] private float maxHealth = 5f;
+    private float health;
+
     private Vector3 lookDirection;
     private float angle;
 
@@ -25,15 +28,12 @@ public class Enemy : MonoBehaviour
     {
         isWalkToTile = false;
         tilePosition = transform.position;
-    }
-
-    private void Update()
-    {
-        RotateCharacter();
+        health = maxHealth;
     }
 
     private void FixedUpdate()
     {
+        RotateCharacter();
         MoveCharacter();
     }
 
@@ -72,5 +72,14 @@ public class Enemy : MonoBehaviour
     {
         isWalkToTile = true;
         tilePosition = pos;
+    }
+
+    public void TakingDamage(float damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

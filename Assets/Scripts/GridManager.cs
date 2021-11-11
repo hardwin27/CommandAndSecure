@@ -6,15 +6,32 @@ using UnityEditor.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
+    private static GridManager _instance = null;
+    public static GridManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GridManager>();
+            }
+            return _instance;
+        }
+    }
+
     private Grid grid;
-    [SerializeField] GameObject tilemap;
-    [SerializeField] PrefabBrush lowgroundTileBrush;
-    [SerializeField] PrefabBrush highgroundTileBrush;
-    [SerializeField] PrefabBrush commanderTileBrush;
-    [SerializeField] PrefabBrush enemySpawnereTileBrush;
+    [SerializeField] private GameObject tilemap;
+    [SerializeField] private PrefabBrush lowgroundTileBrush;
+    [SerializeField] private PrefabBrush highgroundTileBrush;
+    [SerializeField] private PrefabBrush commanderTileBrush;
+    [SerializeField] private PrefabBrush enemySpawnereTileBrush;
 
     private Tile[,] tiles = new Tile[10, 10];
     private List<EnemySpawnerTile> enemySpawnerTiles = new List<EnemySpawnerTile>();
+
+    [SerializeField] private Commander commander;
+    //Index reference the position of commander in the Tilemap
+    private Vector2Int commanderIndex = Vector2Int.zero;
 
     private void Awake()
     {
@@ -26,7 +43,7 @@ public class GridManager : MonoBehaviour
         LoadMap();
         AddTilesToArray();
         AddEnemySpawnerTileToList();
-        InitiateCurrentCommanderTile();
+        UpdateCurrentCommanderTile();
         InitiateNeighborsForTiles();
         GoalbasedPathfinding();
     }
@@ -54,7 +71,7 @@ public class GridManager : MonoBehaviour
                         break;
                     case 'V':
                         commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
-                        GameManager.Instance.SetCommanderPositionAndIndex(new Vector3(startX, startY, 0), new Vector2Int(indY, indX));
+                        commanderIndex = new Vector2Int(indY, indX);
                         break;
                     default:
                         lowgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
@@ -76,6 +93,7 @@ public class GridManager : MonoBehaviour
             Tile tempTile = child.GetComponent<Tile>();
 
             tiles[counterX, counterY] = tempTile;
+            tempTile.SetIndex(new Vector2Int(counterX, counterY));
             counterX++;
             if (counterX >= 10)
             {
@@ -100,10 +118,10 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void InitiateCurrentCommanderTile()
+    private void UpdateCurrentCommanderTile()
     {
-        Vector2Int commanderIndex = GameManager.Instance.GetCommanderIndex();
         tiles[commanderIndex.x, commanderIndex.y].GetComponent<CommanderTile>().SetIsCurrentCommanderPosition(true);
+        commander.transform.position = tiles[commanderIndex.x, commanderIndex.y].transform.position;
     }
 
     public List<EnemySpawnerTile> GetEnemySpawnTiles()
@@ -156,7 +174,6 @@ public class GridManager : MonoBehaviour
                 tiles[indX, indY].SetMark(false);
             }
         }
-        Vector2Int commanderIndex = GameManager.Instance.GetCommanderIndex();
         tiles[commanderIndex.x, commanderIndex.y].SetMark(true);
         tiles[commanderIndex.x, commanderIndex.y].SetDistance(0);
         Queue<Tile> queue = new Queue<Tile>();
@@ -233,5 +250,13 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ChangeCommanderTile(Vector2Int newIndex)
+    {
+        tiles[commanderIndex.x, commanderIndex.y].GetComponent<CommanderTile>().SetIsCurrentCommanderPosition(false);
+        commanderIndex = newIndex;
+        UpdateCurrentCommanderTile();
+        GoalbasedPathfinding();
     }
 }

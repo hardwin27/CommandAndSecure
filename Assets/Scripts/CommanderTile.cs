@@ -22,7 +22,7 @@ public class CommanderTile : Tile
         base.OnMouseDown();
         if(!isCurrentCommanderPosition)
         {
-
+            GridManager.Instance.ChangeCommanderTile(index);
         }
     }
 

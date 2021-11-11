@@ -13,6 +13,8 @@ public class Tile : MonoBehaviour
     protected bool isLowground;
     protected bool isCommanderTile = false;
 
+    protected Vector2Int index;
+
     //Mark used for the gridbased pathfinding
     protected bool mark = false;
 
@@ -23,7 +25,7 @@ public class Tile : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+       
     }
 
     protected virtual void Update()
@@ -96,6 +98,16 @@ public class Tile : MonoBehaviour
     public bool GetMark()
     {
         return mark;
+    }
+
+    public void SetIndex(Vector2Int value)
+    {
+        index = value;
+    }
+
+    public Vector2Int GetIndex()
+    {
+        return index;
     }
 
     //for debugging
