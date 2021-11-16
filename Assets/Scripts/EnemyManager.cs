@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GridManager gridManager;
 
     [SerializeField] private List<GameObject> enemyPrefabs;
-    private int enemyAmount = 5;
+    private int enemyAmount = 10;
     private int enemyIndex = -1;
     private GameObject enemyPrefab;
     private float spawnInterval;

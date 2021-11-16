@@ -34,12 +34,19 @@ public class Agent : MonoBehaviour
     private void Update()
     {
         Shoot();
-        print(placedPosition);
     }
 
     private void FixedUpdate()
     {
         RotateAgents();
+    }
+
+    private void OnMouseOver()
+    {
+        if(Input.GetMouseButtonUp(1))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void RotateAgents()

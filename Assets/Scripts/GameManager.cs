@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         {'#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O' },
         {'X', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O' },
         {'#', '#', 'O', 'O', '#', '#', '#', 'O', 'O', 'O' },
-        {'#', '#', 'O', 'O', '#', '#', '#', 'O', 'O', 'U' },
+        {'#', '#', '!', '!', '#', '#', '#', 'O', 'O', 'U' },
         {'#', '#', 'O', 'O', '#', '#', '#', '#', '#', '#' },
         {'#', '#', 'O', 'O', '#', '#', '#', '#', '#', '#' },
         {'O', 'O', 'O', 'O', '#', '#', '#', 'O', 'O', 'V' },
@@ -35,9 +35,14 @@ public class GameManager : MonoBehaviour
     {
         {0, new EnemyToSpawn(0, 1f, 0) },
         {1, new EnemyToSpawn(0, 1f, 0) },
-        {2, new EnemyToSpawn(0, 0.5f, 0) },
-        {3, new EnemyToSpawn(0, 0.5f, 0) },
-        {4, new EnemyToSpawn(0, 2f, 0) },
+        {2, new EnemyToSpawn(1, 0.5f, 0) },
+        {3, new EnemyToSpawn(1, 0.5f, 0) },
+        {4, new EnemyToSpawn(2, 2f, 0) },
+        {5, new EnemyToSpawn(0, 1f, 0) },
+        {6, new EnemyToSpawn(1, 1f, 0) },
+        {7, new EnemyToSpawn(2, 0.5f, 0) },
+        {8, new EnemyToSpawn(2, 0.5f, 0) },
+        {9, new EnemyToSpawn(0, 2f, 0) },
     };
 
     public List<Vector2Int> enemySpawnTileIndexs = new List<Vector2Int>();

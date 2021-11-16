@@ -13,15 +13,21 @@ public class AgentEnemyDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        agent.detectedEnemies.Add(collision.transform);
+        if(collision.gameObject.layer == 8)
+        {
+            agent.detectedEnemies.Add(collision.transform);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Transform temp = collision.transform;
-        if (agent.detectedEnemies.FindIndex(t => t == temp) != -1)
+        if (collision.gameObject.layer == 8)
         {
-            agent.detectedEnemies.Remove(temp);
+            Transform temp = collision.transform;
+            if (agent.detectedEnemies.FindIndex(t => t == temp) != -1)
+            {
+                agent.detectedEnemies.Remove(temp);
+            }
         }
     }
 }

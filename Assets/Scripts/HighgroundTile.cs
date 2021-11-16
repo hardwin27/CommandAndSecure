@@ -19,7 +19,6 @@ public class HighgroundTile : Tile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(index);
         if(placedAgent != null)
         {
             return;
@@ -37,7 +36,6 @@ public class HighgroundTile : Tile
     {
         if(placedAgent == null)
         {
-            print("null lol");
             return;
         }
 

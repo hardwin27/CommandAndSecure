@@ -25,6 +25,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private PrefabBrush highgroundTileBrush;
     [SerializeField] private PrefabBrush commanderTileBrush;
     [SerializeField] private PrefabBrush enemySpawnereTileBrush;
+    [SerializeField] private PrefabBrush effectDamageTileBrush;
 
     private Tile[,] tiles = new Tile[10, 10];
     private List<EnemySpawnerTile> enemySpawnerTiles = new List<EnemySpawnerTile>();
@@ -68,6 +69,9 @@ public class GridManager : MonoBehaviour
                         break;
                     case 'U':
                         commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                        break;
+                    case '!':
+                        effectDamageTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                         break;
                     case 'V':
                         commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));

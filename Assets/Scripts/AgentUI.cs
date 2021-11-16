@@ -38,6 +38,7 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         if(currentSelectedAgent.placedPosition == null)
         {
+            print(currentSelectedAgent.placedPosition);
             Destroy(currentSelectedAgent.gameObject);
         }
         else

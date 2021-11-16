@@ -19,6 +19,20 @@ public class Enemy : MonoBehaviour
     private bool isWalkToTile;
     private Vector3 tilePosition;
 
+    private float dotInterval = 1f;
+    private float dotDuration;
+    private float dotTimer;
+    private float dotDamage;
+
+    public Commander detectedCommander = null;
+
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float shootInterval = 1;
+    [SerializeField] private float projectileSpeed = 5;
+    [SerializeField] private float projectileDamage = 2;
+    private float shootTimer;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -29,12 +43,29 @@ public class Enemy : MonoBehaviour
         isWalkToTile = false;
         tilePosition = transform.position;
         health = maxHealth;
+
+        dotTimer = dotInterval;
+        shootTimer = shootInterval;
+    }
+
+    private void Update()
+    {
+        DamageOverTime();
     }
 
     private void FixedUpdate()
     {
-        RotateCharacter();
-        MoveCharacter();
+        if(detectedCommander == null)
+        {
+            RotateCharacter();
+            MoveCharacter();
+        }
+        else
+        {
+            LookToCommander();
+            Shoot();
+        }
+        
     }
 
     private void RotateCharacter()
@@ -55,9 +86,9 @@ public class Enemy : MonoBehaviour
 
         if (lookDirection != Vector3.zero)
         {
+            lookDirection.Normalize();
             angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
             body.rotation = angle;
-            lookDirection.Normalize();
         }
 
         moveDirection = lookDirection;
@@ -80,6 +111,69 @@ public class Enemy : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void SetDoT(float duration, float damageValue)
+    {
+        if(duration > dotDuration)
+        {
+            dotDuration = duration;
+        }
+
+        if(damageValue > dotDamage)
+        {
+            dotDamage = damageValue;
+        }
+    }
+
+    private void DamageOverTime()
+    {
+        if(dotDuration >= 0)
+        {
+
+            dotTimer -= Time.deltaTime;
+            if(dotTimer <= 0)
+            {
+                TakingDamage(dotDamage);
+                dotTimer = dotInterval;
+            }
+            dotDuration -= Time.deltaTime;
+        }
+        else
+        {
+            dotTimer = dotInterval;
+        }
+    }
+
+    private void LookToCommander()
+    {
+        lookDirection = detectedCommander.transform.position - transform.position;
+        lookDirection.Normalize();
+        angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        body.rotation = angle;
+        lookDirection.Normalize();
+    }
+    
+    private void Shoot()
+    {
+        if(detectedCommander == null)
+        {
+            shootTimer = shootInterval;
+        }
+        else
+        {
+            if(shootTimer > 0)
+            {
+                shootTimer -= Time.deltaTime;
+            }
+            else
+            {
+                shootTimer = shootInterval;
+                GameObject projectile = Instantiate(projectilePrefab);
+                projectile.transform.position = firePoint.position;
+                projectile.GetComponent<Projectile>().SetProperty(detectedCommander.transform, projectileSpeed, projectileDamage);
+            }
         }
     }
 }
