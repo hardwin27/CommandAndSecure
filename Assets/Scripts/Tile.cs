@@ -6,11 +6,11 @@ public class Tile : MonoBehaviour
 {
     protected List<Tile> neighbors = new List<Tile>();
 
-    protected int distance = 0;
+    [SerializeField] protected int distance = 0;
     protected Vector3 direction = Vector3.zero;
-    protected Tile cameFrom;
+    [SerializeField] protected Tile cameFrom;
 
-    protected bool isLowground;
+    [SerializeField] protected bool isLowground;
     protected bool isCommanderTile = false;
 
     protected Vector2Int index;
@@ -82,6 +82,8 @@ public class Tile : MonoBehaviour
         {
             value = new Vector3(value.x / Mathf.Abs(value.x), value.y / Mathf.Abs(value.y), 0f);
         }
+
+
         direction = value;
     }
 
