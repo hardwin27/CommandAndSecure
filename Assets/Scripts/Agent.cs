@@ -11,6 +11,8 @@ public class Agent : MonoBehaviour
     public List<Transform> detectedEnemies = new List<Transform>();
     private Vector3 lookDirection;
 
+    [SerializeField] private int photonCost = 10;
+
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float shootInterval = 1;
@@ -45,6 +47,8 @@ public class Agent : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(1))
         {
+            GameManager.Instance.AddPhoton(photonCost / 2);
+            GameManager.Instance.AddAgent(-1);
             Destroy(gameObject);
         }
     }
@@ -81,6 +85,11 @@ public class Agent : MonoBehaviour
                 projectile.GetComponent<Projectile>().SetProperty(detectedEnemies[0].transform, projectileSpeed, projectileDamage);
             }
         }
+    }
+
+    public int GetPhotonCost()
+    {
+        return photonCost;
     }
 
     public Sprite GetAgentIcon()

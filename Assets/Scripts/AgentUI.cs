@@ -11,6 +11,8 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private Agent agent;
     private Agent currentSelectedAgent;
 
+    private bool isDragging = false;
+
     public void SetAgent(Agent value)
     {
         agent = value;
@@ -19,33 +21,48 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        GameObject newAgentObj = Instantiate(agent.gameObject, GameManager.Instance.GetAgentParent());
-        currentSelectedAgent = newAgentObj.GetComponent<Agent>();
-        currentSelectedAgent.ToggleOrderInLayer(true);
+        if(GameManager.Instance.photonAmount >= agent.GetPhotonCost() && GameManager.Instance.GetIfCanSpawnAgent())
+        {
+            GameObject newAgentObj = Instantiate(agent.gameObject, GameManager.Instance.GetAgentParent());
+            currentSelectedAgent = newAgentObj.GetComponent<Agent>();
+            currentSelectedAgent.ToggleOrderInLayer(true);
+            isDragging = true;
+        }
+        else
+        {
+            isDragging = false;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Camera mainCamera = Camera.main;
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = -mainCamera.transform.position.z;
-        Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        if(isDragging)
+        {
+            Camera mainCamera = Camera.main;
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition.z = -mainCamera.transform.position.z;
+            Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        currentSelectedAgent.transform.position = targetPosition;
+            currentSelectedAgent.transform.position = targetPosition;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(currentSelectedAgent.placedPosition == null)
+        if(isDragging)
         {
-            print(currentSelectedAgent.placedPosition);
-            Destroy(currentSelectedAgent.gameObject);
-        }
-        else
-        {
-            currentSelectedAgent.LockPlacement();
-            currentSelectedAgent.ToggleOrderInLayer(false);
-            currentSelectedAgent = null;
+            if (currentSelectedAgent.placedPosition == null)
+            {
+                Destroy(currentSelectedAgent.gameObject);
+            }
+            else
+            {
+                currentSelectedAgent.LockPlacement();
+                currentSelectedAgent.ToggleOrderInLayer(false);
+                GameManager.Instance.AddPhoton(-1 * currentSelectedAgent.GetPhotonCost());
+                GameManager.Instance.AddAgent(1);
+                currentSelectedAgent = null;
+            }
         }
     }
 }

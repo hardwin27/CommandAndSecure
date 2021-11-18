@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -53,10 +54,27 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Agent[] agents;
     [SerializeField] private Transform agentParent;
+    [SerializeField] private int agentLimit = 4;
+    public int agentCounter { get; private set; }
+
+    //Photon related
+    [SerializeField] private Text photonCounterText;
+    [SerializeField] private int initialPhotonAmount = 10;
+    public int photonAmount { get; private set; }
+    [SerializeField] private float photonInterval = 1f;
+    private float photonTimer;
 
     private void Start()
     {
         InstantiateAllAgentUI();
+
+        photonTimer = photonInterval;
+        InititatePhoton();
+    }
+
+    private void Update()
+    {
+        GeneratePhoton();
     }
 
     private void InstantiateAllAgentUI()
@@ -74,5 +92,46 @@ public class GameManager : MonoBehaviour
     public Transform GetAgentParent()
     {
         return agentParent;
+    }
+
+    private void InititatePhoton()
+    {
+        photonAmount = initialPhotonAmount;
+        UpdatePhotonCounter();
+    }
+
+    private void GeneratePhoton()
+    {
+        if(photonTimer > 0)
+        {
+            photonTimer -= Time.deltaTime;
+        }
+        else
+        {
+            AddPhoton(1);
+
+            photonTimer = photonInterval;
+        }
+    }
+
+    public void AddPhoton(int amount)
+    {
+        photonAmount += amount;
+        UpdatePhotonCounter();
+    }
+
+    private void UpdatePhotonCounter()
+    {
+        photonCounterText.text = photonAmount.ToString();
+    }
+
+    public bool GetIfCanSpawnAgent()
+    {
+        return agentCounter < agentLimit;
+    }
+
+    public void AddAgent(int amount)
+    {
+        agentCounter += amount;
     }
 }
