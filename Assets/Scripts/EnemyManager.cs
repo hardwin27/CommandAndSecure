@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    private static EnemyManager _instance = null;
+    public static EnemyManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<EnemyManager>();
+            }
+            return _instance;
+        }
+    }
+
     [SerializeField] private GridManager gridManager;
 
     [SerializeField] private List<GameObject> enemyPrefabs;
@@ -56,5 +69,13 @@ public class EnemyManager : MonoBehaviour
     {
         gridManager.GetEnemySpawnTiles()[enemySpawnerIndex].SpawnEnemy(enemyPrefab, transform);
         UpdateSelectedEnemy();
+    }
+
+    public void ResetMovement()
+    {
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<Enemy>().ResetMovement();
+        }
     }
 }

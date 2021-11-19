@@ -7,8 +7,13 @@ public class Tile : MonoBehaviour
     protected List<Tile> neighbors = new List<Tile>();
 
     [SerializeField] protected int distance = 0;
-    protected Vector3 direction = Vector3.zero;
+    [SerializeField] protected Vector3 direction = Vector3.zero;
     [SerializeField] protected Tile cameFrom;
+
+    [SerializeField] protected float distanceLeft = 0f;
+    [SerializeField] protected float distanceRight = 0f;
+    [SerializeField] protected float distanceUp = 0f;
+    [SerializeField] protected float distanceDown = 0f;
 
     [SerializeField] protected bool isLowground;
     protected bool isCommanderTile = false;
@@ -68,21 +73,51 @@ public class Tile : MonoBehaviour
         return distance;
     }
 
-    public void SetDirection(Vector3 value)
+    public void SetDirection(float left, float right, float up, float down)
     {
-        if(Mathf.Abs(value.x) > Mathf.Abs(value.y))
-        {
-            value = new Vector3(value.x / Mathf.Abs(value.x), 0f, 0f);
-        }
-        else if (Mathf.Abs(value.x) < Mathf.Abs(value.y))
-        {
-            value = new Vector3(0f, value.y / Mathf.Abs(value.y), 0f);
-        }
-        else
-        {
-            value = new Vector3(value.x / Mathf.Abs(value.x), value.y / Mathf.Abs(value.y), 0f);
-        }
+        distanceLeft = left;
+        distanceRight = right;
+        distanceUp = up;
+        distanceDown = down;
 
+        float newX = (left - right);
+        float newY = up - down;
+        Vector3 value = new Vector3(newX, newY, 0f).normalized;
+        value = new Vector3(Mathf.Round(value.x), Mathf.Round(value.y), 0f);
+
+        
+        //Fixing bad value
+        if (newX == 0 && newY == 0)
+        {
+            if(!isCommanderTile)
+            {
+                int tempDistance = distance;
+                Transform tempTranform = transform;
+                foreach(Tile neighbor in neighbors)
+                {
+                    if(neighbor.GetIsLowground())
+                    {
+                        if (neighbor.GetDistance() < tempDistance)
+                        {
+                            tempDistance = neighbor.GetDistance();
+                            tempTranform = neighbor.transform;
+                        }
+                    }
+                }
+                value = (tempTranform.position - transform.position).normalized;
+            }
+        }
+        else if(Mathf.Abs(value.x) == Mathf.Abs(value.y))
+        {
+            if(value.x == value.y)
+            {
+                value = new Vector3(0f, value.y, 0f);
+            }
+            else
+            {
+                value = new Vector3(value.x, 0f, 0f);
+            }
+        }
 
         direction = value;
     }

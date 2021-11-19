@@ -16,8 +16,8 @@ public class Enemy : MonoBehaviour
     private Vector2 moveDirection;
 
     [SerializeField] private EnemyTileDetector tileDetector;
-    private bool isWalkToTile;
-    private Vector3 tilePosition;
+    [SerializeField] private bool isWalkToTile;
+    [SerializeField] private Vector3 tilePosition;
 
     private float dotInterval = 1f;
     private float dotDuration;
@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
 
     private void RotateCharacter()
     {
-        if(Vector3.Distance(transform.position, tilePosition) < 0.1f)
+        if(Vector3.Distance(transform.position, tilePosition) <= 0.1f)
         {
             isWalkToTile = false;
         }
@@ -103,6 +103,11 @@ public class Enemy : MonoBehaviour
     {
         isWalkToTile = true;
         tilePosition = pos;
+    }
+
+    public void ResetMovement()
+    {
+        isWalkToTile = !isWalkToTile;
     }
 
     public void TakingDamage(float damage)

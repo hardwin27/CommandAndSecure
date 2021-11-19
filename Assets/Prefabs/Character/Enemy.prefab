@@ -137,7 +137,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.0275, y: 0}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.2
 --- !u!114 &3348418880389638063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.0275, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.25
 --- !u!114 &419423872990667987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +291,8 @@ MonoBehaviour:
   maxHealth: 5
   moveSpeed: 1.5
   tileDetector: {fileID: 3348418880389638063}
+  isWalkToTile: 0
+  tilePosition: {x: 0, y: 0, z: 0}
   detectedCommander: {fileID: 0}
   firePoint: {fileID: 9178375057183616933}
   projectilePrefab: {fileID: 7407456559082827908, guid: 252efc3f203441f4090730040e54acfc, type: 3}

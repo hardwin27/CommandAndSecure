@@ -96,6 +96,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9b0d5c4023f564587e9b133c40336b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distance: 0
+  direction: {x: 0, y: 0, z: 0}
+  cameFrom: {fileID: 0}
+  distanceLeft: 0
+  distanceRight: 0
+  distanceUp: 0
+  distanceDown: 0
+  isLowground: 0
   placedAgent: {fileID: 0}
 --- !u!61 &7266695950009102141
 BoxCollider2D:
@@ -107,7 +115,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -121,5 +129,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0

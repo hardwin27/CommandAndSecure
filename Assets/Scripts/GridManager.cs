@@ -234,22 +234,22 @@ public class GridManager : MonoBehaviour
                     }
                     if (indY > 0)
                     {
-                        //up
+                        //down
                         if (tiles[indX, indY - 1].GetIsLowground())
                         {
-                            distanceUp = tiles[indX, indY - 1].GetDistance() - tiles[indX, indY].GetDistance();
+                            distanceDown = tiles[indX, indY - 1].GetDistance() - tiles[indX, indY].GetDistance();
                         }
                     }
                     if (indY < 10 - 1)
                     {
-                        //down
+                        //up
                         if (tiles[indX, indY + 1].GetIsLowground())
                         {
-                            distanceDown = tiles[indX, indY + 1].GetDistance() - tiles[indX, indY].GetDistance();
+                            distanceUp = tiles[indX, indY + 1].GetDistance() - tiles[indX, indY].GetDistance();
                         }
                     }
                     
-                    tiles[indX, indY].SetDirection(new Vector3(distanceLeft - distanceRight, distanceDown - distanceUp, 0f).normalized);
+                    tiles[indX, indY].SetDirection(distanceLeft, distanceRight, distanceUp, distanceDown);
                     
                 }
             }
@@ -262,5 +262,6 @@ public class GridManager : MonoBehaviour
         commanderIndex = newIndex;
         UpdateCurrentCommanderTile();
         GoalbasedPathfinding();
+        EnemyManager.Instance.ResetMovement();
     }
 }
