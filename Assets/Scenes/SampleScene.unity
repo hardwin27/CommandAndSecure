@@ -576,6 +576,7 @@ MonoBehaviour:
   - {fileID: 8118265845761269334, guid: 9bbc2c65eb3b16c4eb2b7e53bd25dd0a, type: 3}
   - {fileID: 6176188573368377694, guid: 3ece7faea01615b4cb047ee55da10a52, type: 3}
   agentParent: {fileID: 814657503}
+  agentLimit: 4
   photonCounterText: {fileID: 183248227}
   initialPhotonAmount: 10
   photonInterval: 1
@@ -692,6 +693,7 @@ MonoBehaviour:
   commanderTileBrush: {fileID: 11400000, guid: e8f074845dcb659428f2ec8d2b74e129, type: 2}
   enemySpawnereTileBrush: {fileID: 11400000, guid: c8bdda52da6dcd14ba1e82ed4bea23e0, type: 2}
   effectDamageTileBrush: {fileID: 11400000, guid: b1097353cb99ca743bfd42bcf5efadd7, type: 2}
+  doorTileBrush: {fileID: 11400000, guid: 62131ae00ef31c14c8ed2e743d088122, type: 2}
   commander: {fileID: 54841372}
 --- !u!1001 &1190422301
 PrefabInstance:

@@ -32,14 +32,22 @@ public class GameManager : MonoBehaviour
         {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },*/
         {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
         {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
-        {'O', 'O', 'O', 'X', 'O', 'O', 'O', 'O', 'O', 'O' },
+        {'O', 'O', '?', 'X', 'O', 'O', 'O', 'O', 'O', 'O' },
         {'!', '!', '#', '#', 'O', 'O', 'O', 'X', 'O', 'O' },
         {'O', 'O', '#', '#', 'O', 'O', 'O', 'O', 'O', 'O' },
-        {'O', 'O', 'O', '!', 'O', '#', '#', '#', '#', 'O' },
+        {'O', 'O', '?', '!', '?', '#', '#', '#', '#', '?' },
         {'O', '#', '#', 'V', 'O', '#', '#', '#', '#', 'O' },
         {'O', '#', '#', 'O', 'O', 'O', 'O', 'O', '!', 'O' },
         {'V', '#', '#', 'O', 'O', 'O', 'O', 'O', '!', 'V' },
         {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+    };
+
+    public List<Door> doorsData = new List<Door>()
+    {
+        new Door(new Vector2Int(2, 2), 0, false),
+        new Door(new Vector2Int(2, 5), 0, true),
+        new Door(new Vector2Int(4, 5), 1, false),
+        new Door(new Vector2Int(9, 5), 1, true),
     };
 
     public Dictionary<int, EnemyToSpawn> enemiesData = new Dictionary<int, EnemyToSpawn> ()

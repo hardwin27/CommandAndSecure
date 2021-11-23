@@ -26,9 +26,11 @@ public class GridManager : MonoBehaviour
     [SerializeField] private PrefabBrush commanderTileBrush;
     [SerializeField] private PrefabBrush enemySpawnereTileBrush;
     [SerializeField] private PrefabBrush effectDamageTileBrush;
+    [SerializeField] private PrefabBrush doorTileBrush;
 
     private Tile[,] tiles = new Tile[10, 10];
     private List<EnemySpawnerTile> enemySpawnerTiles = new List<EnemySpawnerTile>();
+    private List<DoorTile> doorTiles = new List<DoorTile>();
 
     [SerializeField] private Commander commander;
     //Index reference the position of commander in the Tilemap
@@ -44,6 +46,7 @@ public class GridManager : MonoBehaviour
         LoadMap();
         AddTilesToArray();
         AddEnemySpawnerTileToList();
+        AddDoorTileToList();
         UpdateCurrentCommanderTile();
         InitiateNeighborsForTiles();
         GoalbasedPathfinding();
@@ -72,6 +75,9 @@ public class GridManager : MonoBehaviour
                         break;
                     case '!':
                         effectDamageTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                        break;
+                    case '?':
+                        doorTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                         break;
                     case 'V':
                         commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
@@ -117,6 +123,25 @@ public class GridManager : MonoBehaviour
             }
             catch
             {
+                continue;
+            }
+        }
+    }
+
+    private void AddDoorTileToList()
+    {
+        foreach(Door doorData in GameManager.Instance.doorsData)
+        {
+            try
+            {
+                DoorTile tempDoorTile = tiles[doorData.DoorIndex.x, doorData.DoorIndex.y].gameObject.GetComponent<DoorTile>();
+                tempDoorTile.SetGroupId(doorData.GroupId);
+                tempDoorTile.SetIsLowGround(doorData.InitiallyOpen);
+                doorTiles.Add(tempDoorTile);
+            }
+            catch
+            {
+                print("ERROR on DoorData");
                 continue;
             }
         }
@@ -256,12 +281,30 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public void UpdateMap()
+    {
+        UpdateCurrentCommanderTile();
+        GoalbasedPathfinding();
+        EnemyManager.Instance.ResetMovement();
+    }
+
     public void ChangeCommanderTile(Vector2Int newIndex)
     {
         tiles[commanderIndex.x, commanderIndex.y].GetComponent<CommanderTile>().SetIsCurrentCommanderPosition(false);
         commanderIndex = newIndex;
-        UpdateCurrentCommanderTile();
-        GoalbasedPathfinding();
-        EnemyManager.Instance.ResetMovement();
+        UpdateMap();
+    }
+
+    public void ToogleDoorGroup(int groupId)
+    {
+        foreach(DoorTile doorTile in doorTiles)
+        {
+            if(doorTile.GetGroupId() == groupId)
+            {
+                doorTile.ToogleDoor();
+            }
+        }
+
+        UpdateMap();
     }
 }
