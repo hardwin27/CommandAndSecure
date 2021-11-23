@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private float angle;
 
     [SerializeField] private float moveSpeed = 1.5f;
-    private Vector2 moveDirection;
+    [SerializeField] private Vector2 moveDirection;
 
     [SerializeField] private EnemyTileDetector tileDetector;
     [SerializeField] private bool isWalkToTile;

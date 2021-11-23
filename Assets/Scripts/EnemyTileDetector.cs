@@ -15,7 +15,7 @@ public class EnemyTileDetector : MonoBehaviour
         {
             detectedCollider = collision;
             Tile detectedTile = detectedCollider.gameObject.GetComponent<Tile>();
-            if (!detectedTile.GetIsCommanderTile())
+            if (detectedTile.GetIsLowground())
             {
                 detectedDirection = detectedTile.GetDirection();
                 parent.SetNewTileTarget(detectedCollider.transform.position);

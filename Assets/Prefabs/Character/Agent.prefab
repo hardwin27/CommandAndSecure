@@ -192,7 +192,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.1
 --- !u!114 &5697651616286219258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7352021145632985494}
   detectedEnemies: []
+  photonCost: 10
   firePoint: {fileID: 6827258426606668428}
   projectilePrefab: {fileID: 7407456559082827908, guid: 252efc3f203441f4090730040e54acfc, type: 3}
   shootInterval: 1

@@ -161,9 +161,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2662750216281135020}
   - component: {fileID: 2662750216281134931}
-  - component: {fileID: 5882529534974062079}
   - component: {fileID: 1293061789560643619}
   - component: {fileID: 419423872990667987}
+  - component: {fileID: 6058544906896047481}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -239,27 +239,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &5882529534974062079
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2662750216281134930}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &1293061789560643619
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -290,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   moveSpeed: 1.5
+  moveDirection: {x: 0, y: 0}
   tileDetector: {fileID: 3348418880389638063}
   isWalkToTile: 0
   tilePosition: {x: 0, y: 0, z: 0}
@@ -299,3 +279,24 @@ MonoBehaviour:
   shootInterval: 1
   projectileSpeed: 5
   projectileDamage: 2
+--- !u!50 &6058544906896047481
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2662750216281134930}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
