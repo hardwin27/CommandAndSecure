@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HighgroundTile : Tile
 {
-    [SerializeField] private Agent placedAgent;
+    [SerializeField] private Agent placedAgent = null;
 
     protected override void Awake()
     {
@@ -17,29 +17,13 @@ public class HighgroundTile : Tile
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void SetPlacedAgent(Agent agent)
     {
-        if(placedAgent != null)
-        {
-            return;
-        }
-
-        Agent agent = collision.GetComponent<Agent>();
-        if(agent != null)
-        {
-            agent.SetPlacedPosition(transform.position);
-            placedAgent = agent;
-        }
+        placedAgent = agent;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public Agent GetPlacedAgent()
     {
-        if(placedAgent == null)
-        {
-            return;
-        }
-
-        placedAgent.SetPlacedPosition(null);
-        placedAgent = null;
+        return placedAgent;
     }
 }

@@ -12,6 +12,8 @@ public class DoorTile : Tile
 
     private BoxCollider2D boxCollider;
 
+    public List<Enemy> detectedEnemies { get; private set; } = new List<Enemy>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -31,10 +33,34 @@ public class DoorTile : Tile
         GridManager.Instance.ToogleDoorGroup(groupId);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Enemy tempEnemy = collision.GetComponent<Enemy>();
+        if (tempEnemy != null)
+        {
+            detectedEnemies.Add(tempEnemy);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Enemy tempEnemy = collision.GetComponent<Enemy>();
+        if (tempEnemy != null)
+        {
+            try
+            {
+                detectedEnemies.Remove(tempEnemy);
+            }
+            catch
+            {
+                print("Tile Enemy Error");
+            }
+        }
+    }
+
     public void SetIsLowGround(bool initiallyOpen)
     {
         isLowground = initiallyOpen;
-        print(isLowground);
     }
 
     public void SetGroupId(int id)

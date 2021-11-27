@@ -51,18 +51,21 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         if(isDragging)
         {
-            if (currentSelectedAgent.placedPosition == null)
+            /*if (currentSelectedAgent.placedPosition == null)
             {
                 Destroy(currentSelectedAgent.gameObject);
+                print("NULL");
             }
             else
             {
+                print("PLACED");
                 currentSelectedAgent.LockPlacement();
                 currentSelectedAgent.ToggleOrderInLayer(false);
                 GameManager.Instance.AddPhoton(-1 * currentSelectedAgent.GetPhotonCost());
                 GameManager.Instance.AddAgent(1);
                 currentSelectedAgent = null;
-            }
+            }*/
+            currentSelectedAgent.CheckPlacement();
         }
     }
 }

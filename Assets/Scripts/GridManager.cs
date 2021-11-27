@@ -297,12 +297,23 @@ public class GridManager : MonoBehaviour
 
     public void ToogleDoorGroup(int groupId)
     {
-        foreach(DoorTile doorTile in doorTiles)
+        List<DoorTile> tempDoors = new List<DoorTile>();
+
+        foreach (DoorTile doorTile in doorTiles)
         {
             if(doorTile.GetGroupId() == groupId)
             {
-                doorTile.ToogleDoor();
+                if(doorTile.detectedEnemies.Count > 0)
+                {
+                    return;
+                }
+                tempDoors.Add(doorTile);
             }
+        }
+
+        foreach (DoorTile doorTile in tempDoors)
+        {
+            doorTile.ToogleDoor();
         }
 
         UpdateMap();

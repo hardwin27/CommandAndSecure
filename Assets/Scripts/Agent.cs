@@ -20,6 +20,10 @@ public class Agent : MonoBehaviour
     [SerializeField] private float projectileDamage = 2;
     private float shootTimer;
 
+    private bool isActive = false;
+
+     public HighgroundTile detectedHighgroundTile { get; private set; } = null;
+
     public Vector2? placedPosition { get; private set; }
 
     private void Awake()
@@ -35,11 +39,23 @@ public class Agent : MonoBehaviour
 
     private void Update()
     {
+        print(detectedHighgroundTile);
+
+        if (!isActive)
+        {
+            return;
+        }
+
         Shoot();
     }
 
     private void FixedUpdate()
     {
+        if (!isActive)
+        {
+            return;
+        }
+
         RotateAgents();
     }
 
@@ -49,8 +65,23 @@ public class Agent : MonoBehaviour
         {
             GameManager.Instance.AddPhoton(photonCost / 2);
             GameManager.Instance.AddAgent(-1);
+            detectedHighgroundTile.SetPlacedAgent(null);
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        HighgroundTile tempTile = collision.GetComponent<HighgroundTile>();
+        if(tempTile != null)
+        {
+            detectedHighgroundTile = tempTile;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        detectedHighgroundTile = null;
     }
 
     private void RotateAgents()
@@ -97,14 +128,27 @@ public class Agent : MonoBehaviour
         return spriteRenderer.sprite;
     }
 
-    public void SetPlacedPosition(Vector2? newPosition)
+    /*public void SetPlacedPosition(Vector2? newPosition)
     {
         placedPosition = newPosition;
-    }
+    }*/
 
-    public void LockPlacement()
+    public void CheckPlacement()
     {
-        transform.position = (Vector2)placedPosition;
+        if(detectedHighgroundTile == null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            transform.position = detectedHighgroundTile.transform.position;
+            isActive = true;
+            ToggleOrderInLayer(false);
+            GameManager.Instance.AddPhoton(-1 * GetPhotonCost());
+            GameManager.Instance.AddAgent(1);
+            detectedHighgroundTile.SetPlacedAgent(this);
+        }
+        
     }
 
     public void ToggleOrderInLayer(bool toFront)
