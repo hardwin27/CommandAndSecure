@@ -33,9 +33,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float projectileDamage = 2;
     private float shootTimer;
 
+    [SerializeField] private Canvas enemyUI;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        enemyUI.worldCamera = GameManager.Instance.GetMainCamera();
     }
 
     private void Start()

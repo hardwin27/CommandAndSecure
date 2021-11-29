@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float photonInterval = 1f;
     private float photonTimer;
 
+    [SerializeField] private Camera mainCamera;
+
     private void Start()
     {
         InstantiateAllAgentUI();
@@ -151,5 +153,10 @@ public class GameManager : MonoBehaviour
     public void AddAgent(int amount)
     {
         agentCounter += amount;
+    }
+
+    public Camera GetMainCamera()
+    {
+        return mainCamera;
     }
 }
