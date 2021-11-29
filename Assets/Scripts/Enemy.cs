@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private Transform visual;
     private Rigidbody2D body;
 
     [SerializeField] private float maxHealth = 5f;
@@ -91,7 +92,7 @@ public class Enemy : MonoBehaviour
         {
             lookDirection.Normalize();
             angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-            body.rotation = angle;
+            visual.rotation = Quaternion.Euler(0f,0f, angle);
         }
 
         moveDirection = lookDirection;
@@ -159,7 +160,7 @@ public class Enemy : MonoBehaviour
         lookDirection = detectedCommander.transform.position - transform.position;
         lookDirection.Normalize();
         angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        body.rotation = angle;
+        visual.rotation = Quaternion.Euler(0f, 0f, angle);
         lookDirection.Normalize();
     }
     

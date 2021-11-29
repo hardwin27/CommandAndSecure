@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: projectileDamage
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1046381060605589634, guid: 1627b34d889f2284d91866fc645b9c7e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7bca1aa036312d846876942368becb6d, type: 3}
     - target: {fileID: 2662750216281134930, guid: 1627b34d889f2284d91866fc645b9c7e, type: 3}
       propertyPath: m_Name
       value: EnemyLight
