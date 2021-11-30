@@ -9,6 +9,14 @@ public class DoorTile : Tile
     private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite openDoorSprite;
     [SerializeField] private Sprite closeDoorSprite;
+    private float colorIncrease;
+    private float colorValue;
+
+    [SerializeField] private float cooldownDuration = 20f;
+    private float cooldownUpdateInterval = 1f;
+    private float cooldownTimer;
+    private float cooldownCounter;
+    private bool canBeUsed;
 
     private BoxCollider2D boxCollider;
 
@@ -25,12 +33,28 @@ public class DoorTile : Tile
     protected override void Start()
     {
         UpdateDoor();
+
+        canBeUsed = false;
+        colorIncrease = 1f / cooldownDuration * 0.5f;
+        colorValue = 0;
+        UpdateSpriteColor();
+        cooldownTimer = cooldownUpdateInterval;
+        cooldownCounter = cooldownDuration;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        UpdateCooldownTimer();
     }
 
     protected override void OnMouseDown()
     {
         base.OnMouseDown();
-        GridManager.Instance.ToogleDoorGroup(groupId);
+        if(canBeUsed)
+        {
+            GridManager.Instance.ToogleDoorGroup(groupId);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -90,6 +114,40 @@ public class DoorTile : Tile
         {
             spriteRenderer.sprite = closeDoorSprite;
             boxCollider.size = new Vector2(0.8f, 0.8f);
+        }
+
+        canBeUsed = false;
+        cooldownCounter = cooldownDuration;
+        colorValue = 0;
+        UpdateSpriteColor();
+    }
+
+    private void UpdateSpriteColor()
+    {
+        float rgbValue = Mathf.Clamp((colorValue * colorIncrease) + 0.5f, 0f, 1f);
+        spriteRenderer.color = new Color(rgbValue, rgbValue, rgbValue);
+    }
+
+    private void UpdateCooldownTimer()
+    {
+        print(cooldownCounter);
+        if (cooldownCounter <= 0f)
+        {
+            canBeUsed = true;
+        }
+        else
+        {
+            if (cooldownTimer <= 0f)
+            {
+                colorValue += 1;
+                UpdateSpriteColor();
+                cooldownCounter -= 1f;
+                cooldownTimer = cooldownUpdateInterval;
+            }
+            else
+            {
+                cooldownTimer -= Time.deltaTime;
+            }
         }
     }
 }

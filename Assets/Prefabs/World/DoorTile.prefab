@@ -132,3 +132,4 @@ MonoBehaviour:
   isLowground: 0
   openDoorSprite: {fileID: 21300000, guid: 0089ddc4ddc924f449378b0bb1da269b, type: 3}
   closeDoorSprite: {fileID: 21300000, guid: 75ab2e03ee4c8784c8b4a2fc4a318d19, type: 3}
+  cooldownDuration: 20

@@ -446,6 +446,7 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileDamage: 2
   enemyUI: {fileID: 2370244203014949584}
+  healthBar: {fileID: 5165269317419301876}
 --- !u!50 &8965940974701611955
 Rigidbody2D:
   serializedVersion: 4

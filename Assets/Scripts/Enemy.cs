@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour
     private float shootTimer;
 
     [SerializeField] private Canvas enemyUI;
+    [SerializeField] private Slider healthBar;
 
     private void Awake()
     {
@@ -47,6 +49,8 @@ public class Enemy : MonoBehaviour
         isWalkToTile = false;
         tilePosition = transform.position;
         health = maxHealth;
+        healthBar.maxValue = maxHealth;
+        healthBar.value = health;
 
         dotTimer = dotInterval;
         shootTimer = shootInterval;
@@ -117,6 +121,7 @@ public class Enemy : MonoBehaviour
     public void TakingDamage(float damage)
     {
         health -= damage;
+        healthBar.value = health;
         if(health <= 0)
         {
             Destroy(gameObject);
