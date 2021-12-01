@@ -44,12 +44,22 @@ public class DoorTile : Tile
 
     protected override void Update()
     {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
         base.Update();
         UpdateCooldownTimer();
     }
 
     protected override void OnMouseDown()
     {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
         base.OnMouseDown();
         if(canBeUsed)
         {

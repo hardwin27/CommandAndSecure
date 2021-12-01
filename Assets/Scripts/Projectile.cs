@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour
         }
         else if(target.GetComponent<Commander>() != null)
         {
-            print("Commander Damagedd");
+            target.GetComponent<Commander>().TakingDamage(damage);
         }
 
         Destroy(gameObject);

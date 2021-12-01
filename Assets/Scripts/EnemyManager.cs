@@ -37,7 +37,12 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if(!isSpawning)
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
+        if (!isSpawning)
         {
             return;
         }

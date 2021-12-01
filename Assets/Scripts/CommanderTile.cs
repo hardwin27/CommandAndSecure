@@ -36,14 +36,25 @@ public class CommanderTile : Tile
 
     protected override void Update()
     {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
         base.Update();
         UpdateCooldownTimer();
     }
 
     protected override void OnMouseDown()
     {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
         base.OnMouseDown();
-        if(!isCurrentCommanderPosition)
+
+        if (!isCurrentCommanderPosition)
         {
             if(canBeUsed)
             {

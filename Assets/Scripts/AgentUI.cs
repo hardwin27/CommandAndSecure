@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Image agentIcon;
+    [SerializeField] private Text costText;
 
     private Agent agent;
     private Agent currentSelectedAgent;
@@ -17,11 +18,17 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         agent = value;
         agentIcon.sprite = value.GetAgentIcon();
+        costText.text = value.GetPhotonCost().ToString();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if(GameManager.Instance.photonAmount >= agent.GetPhotonCost() && GameManager.Instance.GetIfCanSpawnAgent())
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
+        if (GameManager.Instance.photonAmount >= agent.GetPhotonCost() && GameManager.Instance.GetIfCanSpawnAgent())
         {
             GameObject newAgentObj = Instantiate(agent.gameObject, GameManager.Instance.GetAgentParent());
             currentSelectedAgent = newAgentObj.GetComponent<Agent>();
@@ -36,7 +43,12 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(isDragging)
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
+        if (isDragging)
         {
             Camera mainCamera = Camera.main;
             Vector3 mousePosition = Input.mousePosition;
@@ -49,7 +61,12 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(isDragging)
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
+        if (isDragging)
         {
             /*if (currentSelectedAgent.placedPosition == null)
             {

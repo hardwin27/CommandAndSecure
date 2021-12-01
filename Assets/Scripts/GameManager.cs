@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public List<Vector2Int> enemySpawnTileIndexs = new List<Vector2Int>();
 
-    //UI Related Variable
+    //Agent related UI & Variable
     [SerializeField] private Transform agentUIParent;
     [SerializeField] private GameObject agentUIPrefab;
 
@@ -75,7 +75,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int agentLimit = 4;
     public int agentCounter { get; private set; }
 
-    //Photon related
+    //Enemy related UI & variable
+    [SerializeField] private Text enemyCounterText;
+    private int totalEnemy;
+    private int defeatedEnemyAmount = 0;
+
+    //Photon related UI & variable
     [SerializeField] private Text photonCounterText;
     [SerializeField] private int initialPhotonAmount = 10;
     public int photonAmount { get; private set; }
@@ -84,9 +89,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Camera mainCamera;
 
+    private bool isPaused = false;
+
     private void Start()
     {
         InstantiateAllAgentUI();
+        InstantiateEnemyCounter();
 
         photonTimer = photonInterval;
         InititatePhoton();
@@ -94,6 +102,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (GetIsPaused())
+        {
+            return;
+        }
+
         GeneratePhoton();
     }
 
@@ -106,6 +119,28 @@ public class GameManager : MonoBehaviour
 
             newAgentUI.SetAgent(agent);
             newAgentUI.transform.name = agent.name;
+        }
+    }
+
+    private void InstantiateEnemyCounter()
+    {
+        totalEnemy = enemiesData.Count;
+        UpdateEnemyCounter();
+    }
+
+    private void UpdateEnemyCounter()
+    {
+        enemyCounterText.text = defeatedEnemyAmount.ToString() + "/" + totalEnemy.ToString();
+    }
+
+    public void AddEnemyCounter(int amount)
+    {
+        defeatedEnemyAmount += amount;
+        UpdateEnemyCounter();
+        if(defeatedEnemyAmount == totalEnemy)
+        {
+            GameManager.Instance.SetIsPaused(true);
+            Time.timeScale = 0;
         }
     }
 
@@ -158,5 +193,15 @@ public class GameManager : MonoBehaviour
     public Camera GetMainCamera()
     {
         return mainCamera;
+    }
+
+    public void SetIsPaused(bool value)
+    {
+        isPaused = value;
+    }
+
+    public bool GetIsPaused()
+    {
+        return isPaused;
     }
 }

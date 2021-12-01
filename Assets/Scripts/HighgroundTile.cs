@@ -17,6 +17,16 @@ public class HighgroundTile : Tile
         
     }
 
+    protected override void Update()
+    {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
+        base.Update();
+    }
+
     public void SetPlacedAgent(Agent agent)
     {
         placedAgent = agent;

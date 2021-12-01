@@ -21,7 +21,7 @@ public class AgentEnemyDetector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if(collision.gameObject.layer == 8)
         {
             Transform temp = collision.transform;
             if (agent.detectedEnemies.FindIndex(t => t == temp) != -1)

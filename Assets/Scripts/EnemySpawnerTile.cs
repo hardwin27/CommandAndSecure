@@ -15,6 +15,16 @@ public class EnemySpawnerTile : Tile
 
     }
 
+    protected override void Update()
+    {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
+        base.Update();
+    }
+
     public void SpawnEnemy(GameObject enemyPrefab, Transform parent)
     {
         Instantiate(enemyPrefab, transform.position, Quaternion.identity, parent);

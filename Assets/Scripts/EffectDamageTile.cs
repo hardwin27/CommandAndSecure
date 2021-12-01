@@ -20,6 +20,11 @@ public class EffectDamageTile : Tile
 
     protected override void Update()
     {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
         base.Update();
     }
 

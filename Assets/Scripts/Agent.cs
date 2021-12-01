@@ -7,6 +7,8 @@ public class Agent : MonoBehaviour
     private Rigidbody2D body;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer enemyDetectionArea;
+
 
     public List<Transform> detectedEnemies = new List<Transform>();
     private Vector3 lookDirection;
@@ -39,7 +41,10 @@ public class Agent : MonoBehaviour
 
     private void Update()
     {
-        print(detectedHighgroundTile);
+        if(GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
 
         if (!isActive)
         {
@@ -61,6 +66,11 @@ public class Agent : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if(GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
         if(Input.GetMouseButtonUp(1))
         {
             GameManager.Instance.AddPhoton(photonCost / 2);
@@ -155,5 +165,6 @@ public class Agent : MonoBehaviour
     {
         int order = toFront ? 2 : 1;
         spriteRenderer.sortingOrder = order;
+        enemyDetectionArea.enabled = toFront;
     }
 }

@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1002223910148797099, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002223910148797099, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002223910148797099, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: photonCost
       value: 5
@@ -73,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944029697674374883, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 0.28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
