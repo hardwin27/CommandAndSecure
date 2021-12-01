@@ -100,6 +100,8 @@ public class DoorTile : Tile
     public void ToogleDoor()
     {
         isLowground = !isLowground;
+        SetDistance(0);
+        SetDirection(0f, 0f, 0f, 0f);
         UpdateDoor();
     }
 
@@ -109,11 +111,13 @@ public class DoorTile : Tile
         {
             spriteRenderer.sprite = openDoorSprite;
             boxCollider.size = new Vector2(1f, 1f);
+            boxCollider.isTrigger = true;
         }
         else
         {
             spriteRenderer.sprite = closeDoorSprite;
             boxCollider.size = new Vector2(0.8f, 0.8f);
+            boxCollider.isTrigger = false;
         }
 
         canBeUsed = false;
@@ -130,7 +134,6 @@ public class DoorTile : Tile
 
     private void UpdateCooldownTimer()
     {
-        print(cooldownCounter);
         if (cooldownCounter <= 0f)
         {
             canBeUsed = true;

@@ -7,17 +7,18 @@ public class EnemyTileDetector : MonoBehaviour
     [SerializeField] private Enemy parent;
 
     Collider2D detectedCollider;
-    private Vector3 detectedDirection = Vector3.zero;
+    /*private Vector3 detectedDirection = Vector3.zero;*/
+    private Tile detectedTile = null;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(detectedCollider != collision)
         {
             detectedCollider = collision;
-            Tile detectedTile = detectedCollider.gameObject.GetComponent<Tile>();
-            if (detectedTile.GetIsLowground())
+            Tile tempDetectedTile = detectedCollider.gameObject.GetComponent<Tile>();
+            if (tempDetectedTile.GetIsLowground())
             {
-                detectedDirection = detectedTile.GetDirection();
+                detectedTile = tempDetectedTile;
                 parent.SetNewTileTarget(detectedCollider.transform.position);
             }
         }
@@ -31,6 +32,11 @@ public class EnemyTileDetector : MonoBehaviour
 
     public Vector3 GetDetectedDirection()
     {
-        return detectedDirection;
+        if(detectedTile == null)
+        {
+            return Vector3.zero;
+        }
+
+        return detectedTile.GetDirection();
     }
 }
