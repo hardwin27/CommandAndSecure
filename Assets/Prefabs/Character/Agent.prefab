@@ -265,7 +265,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7407456559082827908, guid: 252efc3f203441f4090730040e54acfc, type: 3}
   shootInterval: 1
   projectileSpeed: 5
-  projectileDamage: 2
+  projectileDamage: 3
 --- !u!50 &3680271640076114273
 Rigidbody2D:
   serializedVersion: 4

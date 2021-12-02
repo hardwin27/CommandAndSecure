@@ -68,7 +68,11 @@ public class GridManager : MonoBehaviour
                         break;
                     case 'X':
                         enemySpawnereTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
-                        GameManager.Instance.enemySpawnTileIndexs.Add(new Vector2Int(indY, indX));
+                        /*GameManager.Instance.enemySpawnTileIndexs.Add(new Vector2Int(indY, indX));*/
+                        break;
+                    case 'V':
+                        commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
+                        commanderIndex = new Vector2Int(indY, indX);
                         break;
                     case 'U':
                         commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
@@ -78,10 +82,6 @@ public class GridManager : MonoBehaviour
                         break;
                     case '?':
                         doorTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
-                        break;
-                    case 'V':
-                        commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
-                        commanderIndex = new Vector2Int(indY, indX);
                         break;
                     default:
                         lowgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
@@ -123,7 +123,7 @@ public class GridManager : MonoBehaviour
             }
             catch
             {
-                continue;
+                print("Error on EnemySpawnerData");
             }
         }
     }

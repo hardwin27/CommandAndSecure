@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GridManager gridManager;
 
     [SerializeField] private List<GameObject> enemyPrefabs;
-    private int enemyAmount = 10;
+    private int enemyAmount;
     private int enemyIndex = -1;
     private GameObject enemyPrefab;
     private float spawnInterval;
@@ -31,6 +31,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
+        enemyAmount = GameManager.Instance.enemiesData.Count;
         UpdateSelectedEnemy();
         isSpawning = true;
     }

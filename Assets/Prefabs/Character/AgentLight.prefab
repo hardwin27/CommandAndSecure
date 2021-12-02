@@ -29,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: projectileDamage
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7352021145632985493, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: m_RootOrder

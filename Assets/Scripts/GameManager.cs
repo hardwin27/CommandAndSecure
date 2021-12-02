@@ -19,8 +19,32 @@ public class GameManager : MonoBehaviour
     }
 
     //Temporary Map Data
-    public char[,] mapData = new char[10, 10] {
-        {'#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O' },
+    public char[,] mapData { private set; get; } = new char[10, 10] {
+        //lvl 1
+        /*{'#', '#', 'O', 'O', 'O', 'O', 'O', 'O', '#', '#' },
+        {'#', '#', 'O', '#', '#', '#', 'O', 'O', '#', '#' },
+        {'O', 'O', 'O', '#', '#', '#', 'O', 'O', '#', '#' },
+        {'X', 'O', 'O', '#', '#', '#', 'O', '#', '#', '#' },
+        {'#', '#', '#', '#', '#', '#', 'O', '#', '#', '#' },
+        {'X', 'O', 'O', '#', '#', '#', 'O', '#', '#', '#' },
+        {'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'V' },
+        {'#', '#', '#', '#', 'O', 'O', 'O', '#', '#', '#' },
+        {'#', '#', '#', '#', 'O', 'O', '#', '#', '#', '#' },
+        {'X', 'O', 'O', 'O', 'O', 'O', '#', '#', '#', '#' },*/
+
+        //lvl 2
+        {'#', 'O', 'O', 'O', '#', '#', 'O', 'U', 'O', '#' },
+        {'#', 'O', 'O', 'O', '#', '#', 'O', 'O', 'O', '#' },
+        {'#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', '#' },
+        {'#', 'O', '#', '#', '#', '#', '#', '#', '#', '#' },
+        {'#', 'X', '#', '#', '#', '#', '#', '#', '#', '#' },
+        {'#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', '#' },
+        {'#', 'O', 'O', 'O', '#', '#', '#', 'O', 'O', '#' },
+        {'#', '#', 'U', 'O', 'O', 'O', '#', 'O', 'O', '#' },
+        {'#', '#', '#', 'O', 'O', 'O', '#', 'O', 'O', '#' },
+        {'#', '#', '#', 'O', 'O', 'V', '#', 'O', 'X', '#' },
+
+        /*{'#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O' },
         {'#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O' },
         {'X', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O' },
         {'#', '#', 'O', 'O', '#', '#', '#', 'O', 'O', 'O' },
@@ -29,7 +53,7 @@ public class GameManager : MonoBehaviour
         {'#', '#', 'O', 'O', '#', '#', '#', '#', '#', '#' },
         {'O', 'O', 'O', 'O', '#', '#', '#', 'O', 'O', 'V' },
         {'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O' },
-        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+        {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },*/
 
         /*{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
         {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
@@ -42,18 +66,81 @@ public class GameManager : MonoBehaviour
         {'V', '#', '#', 'O', 'O', 'O', 'O', 'O', '!', 'V' },
         {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },*/
     };
+    
+    //lvl 1
+    /*public Vector2 commanderInitTile { private set; get; } = new Vector2(9, 6);
+    public float commanderInitHealth { private set; get; } = 25f;*/
 
-    public List<Door> doorsData = new List<Door>()
+    //lvl 2
+    public Vector2 commanderInitTile { private set; get; } = new Vector2(5, 9);
+    public float commanderInitHealth { private set; get; } = 25f;
+
+
+    public List<Door> doorsData { private set; get; } = new List<Door>()
     {
+        //lvl 1
+
+        //lvl 2
+
         /*new Door(new Vector2Int(2, 2), 0, false),
         new Door(new Vector2Int(2, 5), 0, true),
         new Door(new Vector2Int(4, 5), 1, false),
         new Door(new Vector2Int(9, 5), 1, true),*/
     };
 
-    public Dictionary<int, EnemyToSpawn> enemiesData = new Dictionary<int, EnemyToSpawn> ()
+    public Dictionary<int, EnemyToSpawn> enemiesData { private set; get; } = new Dictionary<int, EnemyToSpawn> ()
     {
-        {0, new EnemyToSpawn(0, 1f, 0) },
+        //lvl 1
+        /*{0, new EnemyToSpawn(0, 5f, 2) },
+        {1, new EnemyToSpawn(0, 5f, 2) },
+        {2, new EnemyToSpawn(0, 3f, 2) },
+        {3, new EnemyToSpawn(0, 3f, 2) },
+        {4, new EnemyToSpawn(2, 0.5f, 1) },
+        {5, new EnemyToSpawn(0, 3f, 2) },
+        {6, new EnemyToSpawn(0, 3f, 2) },
+        {7, new EnemyToSpawn(1, 1f, 0) },
+        {8, new EnemyToSpawn(0, 1f, 2) },
+        {9, new EnemyToSpawn(1, 3f, 0) },
+        {10, new EnemyToSpawn(1, 0.5f, 0) },
+        {11, new EnemyToSpawn(2, 0.5f, 1) },
+        {12, new EnemyToSpawn(0, 3f, 2) },
+        {13, new EnemyToSpawn(1, 0.5f, 0) },
+        {14, new EnemyToSpawn(2, 1f, 1) },*/
+
+        //lvl 2
+        {0, new EnemyToSpawn(0, 5f, 1) },
+        {1, new EnemyToSpawn(0, 2f, 1) },
+        {2, new EnemyToSpawn(0, 2f, 1) },
+        {3, new EnemyToSpawn(0, 3f, 1) },
+        {4, new EnemyToSpawn(1, 0.5f, 0) },
+        {5, new EnemyToSpawn(1, 1f, 0) },
+        {6, new EnemyToSpawn(2, 0.5f, 2) },
+        {7, new EnemyToSpawn(1, 1f, 1) },
+        {8, new EnemyToSpawn(0, 5f, 2) },
+        {9, new EnemyToSpawn(0, 2f, 1) },
+        {10, new EnemyToSpawn(1, 2f, 2) },
+        {11, new EnemyToSpawn(2, 0.5f, 2) },
+        {12, new EnemyToSpawn(0, 5f, 1) },
+        {13, new EnemyToSpawn(0, 2f, 1) },
+        {14, new EnemyToSpawn(0, 5f, 0) },
+        {15, new EnemyToSpawn(1, 2f, 0) },
+        {16, new EnemyToSpawn(1, 2f, 0) },
+        {17, new EnemyToSpawn(1, 2f, 0) },
+        {18, new EnemyToSpawn(2, 0.5f, 0) },
+        {19, new EnemyToSpawn(0, 5f, 2) },
+        {20, new EnemyToSpawn(2, 1f, 0) },
+        {21, new EnemyToSpawn(0, 2f, 2) },
+        {22, new EnemyToSpawn(0, 2f, 0) },
+        {23, new EnemyToSpawn(1, 0.5f, 2) },
+        {24, new EnemyToSpawn(1, 1f, 1) },
+        {25, new EnemyToSpawn(2, 5f, 2) },
+        {26, new EnemyToSpawn(2, 0.5f, 1) },
+        {27, new EnemyToSpawn(1, 5f, 0) },
+        {28, new EnemyToSpawn(1, 1f, 2) },
+        {29, new EnemyToSpawn(0, 2f, 1) },
+
+
+        /*{0, new EnemyToSpawn(0, 1f, 0) },
         {1, new EnemyToSpawn(0, 1f, 0) },
         {2, new EnemyToSpawn(1, 0.5f, 0) },
         {3, new EnemyToSpawn(1, 0.5f, 0) },
@@ -62,10 +149,21 @@ public class GameManager : MonoBehaviour
         {6, new EnemyToSpawn(1, 1f, 0) },
         {7, new EnemyToSpawn(2, 0.5f, 0) },
         {8, new EnemyToSpawn(2, 0.5f, 0) },
-        {9, new EnemyToSpawn(0, 2f, 0) },
+        {9, new EnemyToSpawn(0, 2f, 0) },*/
     };
 
-    public List<Vector2Int> enemySpawnTileIndexs = new List<Vector2Int>();
+    public List<Vector2Int> enemySpawnTileIndexs { private set; get; } = new List<Vector2Int>()
+    {
+        //lvl 1
+        /*new Vector2Int(0, 3),
+        new Vector2Int(0, 5),
+        new Vector2Int(0, 9),*/
+
+        //lvl 2
+        new Vector2Int(8, 2),
+        new Vector2Int(1, 4),
+        new Vector2Int(8, 9),
+    };
 
     //Agent related UI & Variable
     [SerializeField] private Transform agentUIParent;
@@ -73,7 +171,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Agent[] agents;
     [SerializeField] private Transform agentParent;
-    [SerializeField] private int agentLimit = 4;
+    //From database
+    //lvl 1
+    /*private int agentLimit = 6;*/
+
+    //lvl2
+    private int agentLimit = 5;
     public int agentCounter { get; private set; }
 
     //Enemy related UI & variable
@@ -83,7 +186,12 @@ public class GameManager : MonoBehaviour
 
     //Photon related UI & variable
     [SerializeField] private Text photonCounterText;
-    [SerializeField] private int initialPhotonAmount = 10;
+    //From database
+    //lvl 1
+    /*private int initialPhotonAmount = 0;*/
+
+    //lvl 2
+    private int initialPhotonAmount = 15;
     public int photonAmount { get; private set; }
     [SerializeField] private float photonInterval = 1f;
     private float photonTimer;
