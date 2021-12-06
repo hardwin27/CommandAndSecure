@@ -12,7 +12,7 @@ public class DoorTile : Tile
     private float colorIncrease;
     private float colorValue;
 
-    [SerializeField] private float cooldownDuration = 20f;
+    [SerializeField] private float cooldownDuration = 15f;
     private float cooldownUpdateInterval = 1f;
     private float cooldownTimer;
     private float cooldownCounter;
