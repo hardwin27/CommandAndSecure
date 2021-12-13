@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b152cdddc78fe4b9808435894d14b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnTileIndexs: []
+  databaseJson: {fileID: 4900000, guid: f9ea047ca809dc648a0b4f007dfa48ee, type: 3}
   agentUIParent: {fileID: 799451503}
   agentUIPrefab: {fileID: 4443406992093591417, guid: 05543c40f98622445b53332da400836a, type: 3}
   agents:
@@ -614,10 +614,8 @@ MonoBehaviour:
   - {fileID: 8118265845761269334, guid: 9bbc2c65eb3b16c4eb2b7e53bd25dd0a, type: 3}
   - {fileID: 6176188573368377694, guid: 3ece7faea01615b4cb047ee55da10a52, type: 3}
   agentParent: {fileID: 814657503}
-  agentLimit: 4
   enemyCounterText: {fileID: 984448499}
   photonCounterText: {fileID: 183248227}
-  initialPhotonAmount: 10
   photonInterval: 1
   mainCamera: {fileID: 519420031}
 --- !u!4 &838063007

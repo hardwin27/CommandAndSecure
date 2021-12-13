@@ -61,26 +61,26 @@ public class GridManager : MonoBehaviour
         {
             for (int indY = 0; indY < 10; indY++)
             {
-                switch(GameManager.Instance.mapData[indX, indY])
+                switch(GameManager.Instance.mapData[indX,indY])
                 {
-                    case '#':
+                    case "#":
                         highgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                         break;
-                    case 'X':
+                    case "X":
                         enemySpawnereTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                         /*GameManager.Instance.enemySpawnTileIndexs.Add(new Vector2Int(indY, indX));*/
                         break;
-                    case 'V':
+                    case "V":
                         commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                         commanderIndex = new Vector2Int(indY, indX);
                         break;
-                    case 'U':
+                    case "U":
                         commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                         break;
-                    case '!':
+                    case "!":
                         effectDamageTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                         break;
-                    case '?':
+                    case "?":
                         doorTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));
                         break;
                     default:
@@ -134,9 +134,9 @@ public class GridManager : MonoBehaviour
         {
             try
             {
-                DoorTile tempDoorTile = tiles[doorData.DoorIndex.x, doorData.DoorIndex.y].gameObject.GetComponent<DoorTile>();
-                tempDoorTile.SetGroupId(doorData.GroupId);
-                tempDoorTile.SetIsLowGround(doorData.InitiallyOpen);
+                DoorTile tempDoorTile = tiles[doorData.doorIndex.x, doorData.doorIndex.y].gameObject.GetComponent<DoorTile>();
+                tempDoorTile.SetGroupId(doorData.groupId);
+                tempDoorTile.SetIsLowGround(doorData.initiallyOpen);
                 doorTiles.Add(tempDoorTile);
             }
             catch

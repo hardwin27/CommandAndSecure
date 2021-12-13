@@ -65,10 +65,10 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        enemyPrefab = enemyPrefabs[GameManager.Instance.enemiesData[enemyIndex].EnemyTypeNum];
-        spawnInterval = GameManager.Instance.enemiesData[enemyIndex].SpawnInterval;
+        enemyPrefab = enemyPrefabs[GameManager.Instance.enemiesData[enemyIndex].enemyTypeNum];
+        spawnInterval = GameManager.Instance.enemiesData[enemyIndex].spawnInterval;
         spawnTimer = spawnInterval;
-        enemySpawnerIndex = GameManager.Instance.enemiesData[enemyIndex].SpawnTileId;
+        enemySpawnerIndex = GameManager.Instance.enemiesData[enemyIndex].spawnTileId;
     }
 
     private void SpawnEnemy()
