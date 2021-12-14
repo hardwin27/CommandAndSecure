@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public TextAsset databaseJson;
     private Database database;
 
-    private int selectedLevel = 1;
+    public static int selectedLevel;
 
     public string[,] mapData { private set; get; } = new string[10, 10];
     public List<Door> doorsData { private set; get; }
@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
 
     private bool isPaused = false;
+
+    private void Awake()
+    {
+        selectedLevel = LevelSelection.instance.selectedLevel;
+    }
 
     private void Start()
     {
