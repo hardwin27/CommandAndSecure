@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public static int selectedLevel;
 
+    //From Database
     public string[,] mapData { private set; get; } = new string[10, 10];
     public List<Door> doorsData { private set; get; }
     public List<Vector2Int> enemySpawnTileIndexs { private set; get; }
@@ -35,10 +36,9 @@ public class GameManager : MonoBehaviour
     //Agent related UI & Variable
     [SerializeField] private Transform agentUIParent;
     [SerializeField] private GameObject agentUIPrefab;
-
+    private AgentUI currentAgentUI;
     [SerializeField] private Agent[] agents;
     [SerializeField] private Transform agentParent;
-
     public int agentCounter { get; private set; }
 
     //Enemy related UI & variable
@@ -48,18 +48,25 @@ public class GameManager : MonoBehaviour
 
     //Photon related UI & variable
     [SerializeField] private Text photonCounterText;
-
     public int photonAmount { get; private set; }
     [SerializeField] private float photonInterval = 1f;
     private float photonTimer;
 
     [SerializeField] private Camera mainCamera;
 
+    [SerializeField] private GameObject pausePanel;
     private bool isPaused = false;
 
     private void Awake()
     {
-        selectedLevel = LevelSelection.instance.selectedLevel;
+        if(LevelSelection.instance == null)
+        {
+            selectedLevel = 0;
+        }
+        else
+        {
+            selectedLevel = LevelSelection.instance.selectedLevel;
+        }
     }
 
     private void Start()
@@ -71,10 +78,17 @@ public class GameManager : MonoBehaviour
 
         photonTimer = photonInterval;
         InititatePhoton();
+
+        UpdatePausePanel();
     }
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetIsPaused(!GetIsPaused());
+        }
+        
         if (GetIsPaused())
         {
             return;
@@ -193,10 +207,33 @@ public class GameManager : MonoBehaviour
     public void SetIsPaused(bool value)
     {
         isPaused = value;
+        if (isPaused == true)
+        {
+            ClearAgentUI();
+        }
+        UpdatePausePanel();
     }
 
     public bool GetIsPaused()
     {
         return isPaused;
+    }
+
+    private void UpdatePausePanel()
+    {
+        pausePanel.SetActive(isPaused);
+    }
+
+    public void SetCurrentSelectedAgent(AgentUI agentUI)
+    {
+        currentAgentUI = agentUI;
+    }
+
+    private void ClearAgentUI()
+    {
+        if(currentAgentUI != null)
+        {
+            currentAgentUI.CleanCurrentSelectedAgent();
+        }
     }
 }

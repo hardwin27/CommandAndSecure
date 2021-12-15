@@ -167,4 +167,9 @@ public class Agent : MonoBehaviour
         spriteRenderer.sortingOrder = order;
         enemyDetectionArea.enabled = toFront;
     }
+
+    public bool GetIsActive()
+    {
+        return isActive;
+    }
 }

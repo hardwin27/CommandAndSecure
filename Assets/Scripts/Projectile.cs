@@ -8,9 +8,22 @@ public class Projectile : MonoBehaviour
     private float speed;
     private float damage;
 
+    private void Update()
+    {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if(target != null)
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+
+        if (target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
             Vector3 direction = target.position - transform.position;

@@ -14,6 +14,14 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     private bool isDragging = false;
 
+    private void Update()
+    {
+        if (GameManager.Instance.GetIsPaused())
+        {
+            return;
+        }
+    }
+
     public void SetAgent(Agent value)
     {
         agent = value;
@@ -34,6 +42,7 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             currentSelectedAgent = newAgentObj.GetComponent<Agent>();
             currentSelectedAgent.ToggleOrderInLayer(true);
             isDragging = true;
+            GameManager.Instance.SetCurrentSelectedAgent(this);
         }
         else
         {
@@ -68,21 +77,21 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         if (isDragging)
         {
-            /*if (currentSelectedAgent.placedPosition == null)
-            {
-                Destroy(currentSelectedAgent.gameObject);
-                print("NULL");
-            }
-            else
-            {
-                print("PLACED");
-                currentSelectedAgent.LockPlacement();
-                currentSelectedAgent.ToggleOrderInLayer(false);
-                GameManager.Instance.AddPhoton(-1 * currentSelectedAgent.GetPhotonCost());
-                GameManager.Instance.AddAgent(1);
-                currentSelectedAgent = null;
-            }*/
             currentSelectedAgent.CheckPlacement();
+        }
+    }
+
+    public void CleanCurrentSelectedAgent()
+    {
+        if(currentSelectedAgent != null)
+        {
+            if (!currentSelectedAgent.GetIsActive())
+            {
+
+                Destroy(currentSelectedAgent.gameObject);
+                currentSelectedAgent = null;
+                isDragging = false;
+            }
         }
     }
 }
