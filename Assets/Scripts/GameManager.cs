@@ -54,8 +54,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Camera mainCamera;
 
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject overlayPanel;
+    [SerializeField] private GameObject pauseText;
+    [SerializeField] private GameObject winText;
+    [SerializeField] private GameObject loseText;
     private bool isPaused = false;
+    private bool isGameOver = false;
+    private bool isWin = false;
 
     private void Awake()
     {
@@ -79,11 +84,16 @@ public class GameManager : MonoBehaviour
         photonTimer = photonInterval;
         InititatePhoton();
 
-        UpdatePausePanel();
+        UpdateOverlayPanel();
     }
 
     private void Update()
     {
+        if(isGameOver)
+        {
+            return;
+        }
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             SetIsPaused(!GetIsPaused());
@@ -148,7 +158,7 @@ public class GameManager : MonoBehaviour
         UpdateEnemyCounter();
         if(defeatedEnemyAmount == totalEnemy)
         {
-            GameManager.Instance.SetIsPaused(true);
+            GameManager.Instance.SetIsWin(true);
             Time.timeScale = 0;
         }
     }
@@ -211,7 +221,7 @@ public class GameManager : MonoBehaviour
         {
             ClearAgentUI();
         }
-        UpdatePausePanel();
+        UpdateOverlayPanel();
     }
 
     public bool GetIsPaused()
@@ -219,9 +229,41 @@ public class GameManager : MonoBehaviour
         return isPaused;
     }
 
-    private void UpdatePausePanel()
+    private void UpdateOverlayPanel()
     {
-        pausePanel.SetActive(isPaused);
+        overlayPanel.SetActive(isPaused);
+        if(isPaused)
+        {
+            if (isGameOver)
+            {
+                if (isWin)
+                {
+                    winText.SetActive(true);
+                }
+                else
+                {
+                    loseText.SetActive(true);
+                }
+            }
+            else
+            {
+                pauseText.SetActive(true);
+            }
+        }
+        else
+        {
+            pauseText.SetActive(false);
+            winText.SetActive(false);
+            loseText.SetActive(false);
+        }
+    }
+
+    public void SetIsWin(bool winStatus)
+    {
+        isGameOver = true;
+        isWin = winStatus;
+
+        SetIsPaused(true);
     }
 
     public void SetCurrentSelectedAgent(AgentUI agentUI)

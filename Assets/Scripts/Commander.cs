@@ -29,7 +29,7 @@ public class Commander : MonoBehaviour
         healthBar.value = health;
         if (health <= 0)
         {
-            GameManager.Instance.SetIsPaused(true);
+            GameManager.Instance.SetIsWin(false);
             Time.timeScale = 0f;
             Destroy(gameObject);
         }
