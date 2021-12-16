@@ -8,7 +8,7 @@ public class Level
     public List<string> mapData;
     public List<Door> doorsData;
     public List<Vector2Int> enemySpawnTileIndexs;
-    public Vector2 commanderInitTile;
+    public Vector2Int commanderInitTile;
     public float commanderInitHealth;
     public int agentLimit;
     public int initialPhotonAmount;

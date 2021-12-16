@@ -13,9 +13,18 @@ public class LevelSelection : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
 
-        DontDestroyOnLoad(this);
+        }
+        else if (instance != this)
+        {
+            Destroy(instance.gameObject);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     private void Start()
@@ -42,5 +51,11 @@ public class LevelSelection : MonoBehaviour
     public void OpenLevel()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void SetSelectedLevel(int id)
+    {
+        selectedLevel = id;
+        UpdateLevelText();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     public string[,] mapData { private set; get; } = new string[10, 10];
     public List<Door> doorsData { private set; get; }
     public List<Vector2Int> enemySpawnTileIndexs { private set; get; }
-    public Vector2 commanderInitTile { private set; get; } = new Vector2(0, 9);
+    public Vector2Int commanderInitTile { private set; get; } = new Vector2Int(0, 9);
     public float commanderInitHealth { private set; get; } = 5f;
     private int agentLimit;
     private int initialPhotonAmount = 0;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseText;
     [SerializeField] private GameObject winText;
     [SerializeField] private GameObject loseText;
+    [SerializeField] private GameObject buttons;
     private bool isPaused = false;
     private bool isGameOver = false;
     private bool isWin = false;
@@ -76,6 +78,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        isPaused = false;
+        isGameOver = false;
+        isWin = false;
+        Time.timeScale = 1f;
+        
         ReadDatabase();
 
         InstantiateAllAgentUI();
@@ -159,7 +166,7 @@ public class GameManager : MonoBehaviour
         if(defeatedEnemyAmount == totalEnemy)
         {
             GameManager.Instance.SetIsWin(true);
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
         }
     }
 
@@ -232,6 +239,7 @@ public class GameManager : MonoBehaviour
     private void UpdateOverlayPanel()
     {
         overlayPanel.SetActive(isPaused);
+        buttons.SetActive(isPaused);
         if(isPaused)
         {
             if (isGameOver)
@@ -277,5 +285,16 @@ public class GameManager : MonoBehaviour
         {
             currentAgentUI.CleanCurrentSelectedAgent();
         }
+    }
+
+    public void ExitLevel()
+    {
+        SceneManager.LoadScene(0);
+        /*LevelSelection.instance.SetSelectedLevel(selectedLevel);*/
+    }
+
+    public void RetryLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
