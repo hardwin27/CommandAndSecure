@@ -1093,8 +1093,8 @@ MonoBehaviour:
   agentUIPrefab: {fileID: 4443406992093591417, guid: 05543c40f98622445b53332da400836a, type: 3}
   agents:
   - {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
-  - {fileID: 8118265845761269334, guid: 9bbc2c65eb3b16c4eb2b7e53bd25dd0a, type: 3}
-  - {fileID: 6176188573368377694, guid: 3ece7faea01615b4cb047ee55da10a52, type: 3}
+  - {fileID: 3545040237525242987, guid: 10dadef1ec3b6354d80d9ebb5881dc00, type: 3}
+  - {fileID: 8636975980645659806, guid: 4b9dd40e015416543866413120d23321, type: 3}
   agentParent: {fileID: 814657503}
   enemyCounterText: {fileID: 984448499}
   photonCounterText: {fileID: 183248227}
@@ -1450,12 +1450,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1978966864}
-  lowgroundTileBrush: {fileID: 11400000, guid: 09fd953b3ca76cc448ae1de96db0e1eb, type: 2}
-  highgroundTileBrush: {fileID: 11400000, guid: 2715bf1e251d6f34e9b0fc182d09ca9d, type: 2}
-  commanderTileBrush: {fileID: 11400000, guid: e8f074845dcb659428f2ec8d2b74e129, type: 2}
-  enemySpawnereTileBrush: {fileID: 11400000, guid: c8bdda52da6dcd14ba1e82ed4bea23e0, type: 2}
-  effectDamageTileBrush: {fileID: 11400000, guid: b1097353cb99ca743bfd42bcf5efadd7, type: 2}
-  doorTileBrush: {fileID: 11400000, guid: 62131ae00ef31c14c8ed2e743d088122, type: 2}
   lowgroundTilePrefab: {fileID: 7631882346082785958, guid: 0c5895a19aaca71438844eac342cdbf3, type: 3}
   highgroundTilePrefab: {fileID: 7631882346082785958, guid: 2404da01df1f8f64fbc0921eeea5e771, type: 3}
   commanderTilePrefab: {fileID: 7631882346082785958, guid: 61e43fa636e740d47a674c6480ee5b92, type: 3}

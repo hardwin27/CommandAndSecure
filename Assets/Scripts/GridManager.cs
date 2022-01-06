@@ -73,34 +73,28 @@ public class GridManager : MonoBehaviour
                 switch(GameManager.Instance.mapData[indX,indY])
                 {
                     case "#":
-                        /*highgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));*/
-                        tempTile =  Instantiate(highgroundTilePrefab, grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile =  Instantiate(highgroundTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
                         break;
                     case "X":
-                        /*enemySpawnereTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));*/
-                        tempTile = Instantiate(enemySpawnereTilePrefab, grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
-                        /*GameManager.Instance.enemySpawnTileIndexs.Add(new Vector2Int(indY, indX));*/
+                        tempTile = Instantiate(enemySpawnereTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
                         break;
                     case "V":
-                        /*commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));*/
-                        tempTile = Instantiate(commanderTilePrefab, grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
-                        /*commanderIndex = new Vector2Int(indY, indX);*/
+                        tempTile = Instantiate(commanderTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
                         break;
-                    /*case "U":
-                        *//*commanderTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));*//*
-                        Instantiate(commanderTilePrefab, grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, grid.transform);
-                        break;*/
                     case "!":
-                        /*effectDamageTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));*/
-                        tempTile = Instantiate(effectDamageTilePrefab, grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile = Instantiate(effectDamageTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
                         break;
                     case "?":
-                        /*doorTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));*/
-                        tempTile = Instantiate(doorTilePrefab, grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile = Instantiate(doorTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
                         break;
                     default:
-                        /*lowgroundTileBrush.Paint(grid, tilemap, grid.WorldToCell(new Vector3(startX, startY, 0)));*/
-                        tempTile = Instantiate(lowgroundTilePrefab, grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile = Instantiate(lowgroundTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
                         break;
                 }
                 tempTile.transform.position = new Vector3(tempTile.transform.position.x - 0.5f, tempTile.transform.position.y + 0.5f, 0f);
