@@ -20,8 +20,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
+      propertyPath: codeName
+      value: Agent L.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: photonCost
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
+      propertyPath: description
+      value: 'The very helpful frontline Agent.
+
+        Very small attack range,
+        fast attack speed, and low damage.
+
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: shootInterval

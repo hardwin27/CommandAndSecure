@@ -13,7 +13,12 @@ public class Agent : MonoBehaviour
     public List<Transform> detectedEnemies = new List<Transform>();
     private Vector3 lookDirection;
 
-    [SerializeField] private int photonCost = 10;
+    [SerializeField] private string codeName = "CodeName";
+    [SerializeField] private int photonCost = 0;
+    [SerializeField] [TextArea] private string description;
+    public string CodeName { get { return codeName; } }
+    public int PhotonCost { get { return photonCost; } }
+    public string Description { get { return description; } }
 
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject projectilePrefab;
@@ -73,7 +78,7 @@ public class Agent : MonoBehaviour
 
         if(Input.GetMouseButtonUp(1))
         {
-            GameManager.Instance.AddPhoton(photonCost / 2);
+            GameManager.Instance.AddPhoton(PhotonCost / 2);
             GameManager.Instance.AddAgent(-1);
             detectedHighgroundTile.SetPlacedAgent(null);
             Destroy(gameObject);
@@ -128,11 +133,6 @@ public class Agent : MonoBehaviour
         }
     }
 
-    public int GetPhotonCost()
-    {
-        return photonCost;
-    }
-
     public Sprite GetAgentIcon()
     {
         return spriteRenderer.sprite;
@@ -154,7 +154,7 @@ public class Agent : MonoBehaviour
             transform.position = detectedHighgroundTile.transform.position;
             isActive = true;
             ToggleOrderInLayer(false);
-            GameManager.Instance.AddPhoton(-1 * GetPhotonCost());
+            GameManager.Instance.AddPhoton(-1 * PhotonCost);
             GameManager.Instance.AddAgent(1);
             detectedHighgroundTile.SetPlacedAgent(this);
         }

@@ -260,7 +260,15 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7352021145632985494}
   enemyDetectionArea: {fileID: 3320859072645087223}
   detectedEnemies: []
+  codeName: Agent S.
   photonCost: 10
+  description: 'Standard Agent.
+
+    Normal attack range, normal attack speed, and
+    normal damage.
+
+
+'
   firePoint: {fileID: 6827258426606668428}
   projectilePrefab: {fileID: 7407456559082827908, guid: 252efc3f203441f4090730040e54acfc, type: 3}
   shootInterval: 1

@@ -26,7 +26,7 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     {
         agent = value;
         agentIcon.sprite = value.GetAgentIcon();
-        costText.text = value.GetPhotonCost().ToString();
+        costText.text = value.PhotonCost.ToString();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -36,7 +36,7 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             return;
         }
 
-        if (GameManager.Instance.photonAmount >= agent.GetPhotonCost() && GameManager.Instance.GetIfCanSpawnAgent())
+        if (GameManager.Instance.photonAmount >= agent.PhotonCost && GameManager.Instance.GetIfCanSpawnAgent())
         {
             GameObject newAgentObj = Instantiate(agent.gameObject, GameManager.Instance.GetAgentParent());
             currentSelectedAgent = newAgentObj.GetComponent<Agent>();

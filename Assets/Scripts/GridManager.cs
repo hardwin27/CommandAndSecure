@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-/*using UnityEditor.Tilemaps;*/
 
 public class GridManager : MonoBehaviour
 {
@@ -21,12 +20,6 @@ public class GridManager : MonoBehaviour
 
     private Grid grid;
     [SerializeField] private GameObject tilemap;
-    /*[SerializeField] private PrefabBrush lowgroundTileBrush;
-    [SerializeField] private PrefabBrush highgroundTileBrush;
-    [SerializeField] private PrefabBrush commanderTileBrush;
-    [SerializeField] private PrefabBrush enemySpawnereTileBrush;
-    [SerializeField] private PrefabBrush effectDamageTileBrush;
-    [SerializeField] private PrefabBrush doorTileBrush;*/
 
     [Header("ObjectPrefab")]
     [SerializeField] private GameObject lowgroundTilePrefab;

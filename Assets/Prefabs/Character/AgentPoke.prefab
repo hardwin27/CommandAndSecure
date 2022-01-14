@@ -20,12 +20,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
+      propertyPath: codeName
+      value: Agent P.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: photonCost
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
+      propertyPath: description
+      value: 'Agent speciallize in harasshing enemy from far away.
+
+        Very
+        large attack range, very fast attack speed, and very low damage.
+
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: shootInterval
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
       propertyPath: projectileSpeed
