@@ -8,6 +8,7 @@ public class LevelSelection : MonoBehaviour
 {
     public static LevelSelection instance;
 
+
     public int selectedLevel { private set; get; } = 0;
     [SerializeField] Text levelText;
 
@@ -48,7 +49,7 @@ public class LevelSelection : MonoBehaviour
         UpdateLevelText();
     }
 
-    public void OpenLevel()
+    public void OpenAgentSelect()
     {
         SceneManager.LoadScene(1);
     }
