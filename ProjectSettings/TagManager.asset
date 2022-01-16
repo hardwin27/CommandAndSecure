@@ -16,7 +16,7 @@ TagManager:
   - Enemy
   - EnemyTileDetector
   - AgentAttack
-  - 
+  - PostProcessing
   - 
   - 
   - 
