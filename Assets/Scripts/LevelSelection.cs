@@ -30,6 +30,12 @@ public class LevelSelection : MonoBehaviour
 
     private void Start()
     {
+        GameObject agentSelectionObject = GameObject.Find("AgentSelectionManager");
+        if (agentSelectionObject != null)
+        {
+            Destroy(agentSelectionObject);
+        }
+
         UpdateLevelText();
     }
 

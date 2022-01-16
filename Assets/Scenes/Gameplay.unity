@@ -1093,8 +1093,8 @@ MonoBehaviour:
   agentUIPrefab: {fileID: 4443406992093591417, guid: 05543c40f98622445b53332da400836a, type: 3}
   agents:
   - {fileID: 5697651616286219258, guid: 43504a84764fd7d44acf8145b16b9b76, type: 3}
-  - {fileID: 3545040237525242987, guid: 10dadef1ec3b6354d80d9ebb5881dc00, type: 3}
-  - {fileID: 8636975980645659806, guid: 4b9dd40e015416543866413120d23321, type: 3}
+  - {fileID: 8118265845761269334, guid: 9bbc2c65eb3b16c4eb2b7e53bd25dd0a, type: 3}
+  - {fileID: 6176188573368377694, guid: 3ece7faea01615b4cb047ee55da10a52, type: 3}
   agentParent: {fileID: 814657503}
   enemyCounterText: {fileID: 984448499}
   photonCounterText: {fileID: 183248227}

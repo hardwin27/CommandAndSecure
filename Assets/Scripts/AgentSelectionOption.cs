@@ -56,4 +56,9 @@ public class AgentSelectionOption : MonoBehaviour
     {
         panelBackground.color = (IsSelected) ? Color.green : Color.white;
     }
+
+    public Agent GetAgent()
+    {
+        return agent;
+    }
 }

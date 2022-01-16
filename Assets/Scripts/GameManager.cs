@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform agentUIParent;
     [SerializeField] private GameObject agentUIPrefab;
     private AgentUI currentAgentUI;
-    [SerializeField] private Agent[] agents;
+    [SerializeField] private List<Agent> agents;
     [SerializeField] private Transform agentParent;
     public int agentCounter { get; private set; }
 
@@ -138,6 +138,12 @@ public class GameManager : MonoBehaviour
 
     private void InstantiateAllAgentUI()
     {
+        if(AgentSelectionManager.Instance != null)
+        {
+            agents.Clear();
+            agents = AgentSelectionManager.Instance.selectedAgentsList;
+        }
+
         foreach (Agent agent in agents)
         {
             GameObject newAgentObj = Instantiate(agentUIPrefab.gameObject, agentUIParent);
@@ -289,8 +295,13 @@ public class GameManager : MonoBehaviour
 
     public void ExitLevel()
     {
+        GameObject agentSelectionObject = GameObject.Find("AgentSelectionManager");
+        if(agentSelectionObject != null)
+        {
+            Destroy(agentSelectionObject);
+        }
+
         SceneManager.LoadScene(0);
-        /*LevelSelection.instance.SetSelectedLevel(selectedLevel);*/
     }
 
     public void RetryLevel()

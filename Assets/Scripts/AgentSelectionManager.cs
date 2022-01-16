@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AgentSelectionManager : MonoBehaviour
 {
@@ -19,7 +21,10 @@ public class AgentSelectionManager : MonoBehaviour
 
     [SerializeField] private Transform agentSelectionPanel;
     [SerializeField] private GameObject agentSelectionOptionPrefab;
-    [SerializeField] private Agent[] agents;
+    [SerializeField] private List<Agent> agents;
+
+    [SerializeField] private Button startButton;
+    public List<Agent> selectedAgentsList { private set; get; }
 
     private int agentAmountReq = 3;
     public int AgentAmountCounter { private set; get; } = 0;
@@ -32,6 +37,8 @@ public class AgentSelectionManager : MonoBehaviour
 
     private void Start()
     {
+        startButton.interactable = false;
+        startButton.onClick.AddListener(StartGame);
         InstantiateAgentSelection();
     }
 
@@ -50,5 +57,40 @@ public class AgentSelectionManager : MonoBehaviour
     public void AddSelectedAgent(int amount)
     {
         AgentAmountCounter += amount;
+        if(IsAgentFull)
+        {
+            startButton.interactable = true;
+        }
+        else
+        {
+            startButton.interactable = false;
+        }
+    }
+
+    public void StartGame()
+    {
+        if (selectedAgentsList == null)
+        {
+            selectedAgentsList = new List<Agent>();
+        }
+        else
+        {
+            selectedAgentsList.Clear();
+        }
+
+        foreach (AgentSelectionOption agentSelection in agentSelectionPanel.GetComponentsInChildren<AgentSelectionOption>())
+        {
+            if (agentSelection.IsSelected)
+            {
+                selectedAgentsList.Add(agentSelection.GetAgent());
+            }
+        }
+
+        SceneManager.LoadScene(2);
+    }
+
+    public void BackToLevelSelect()
+    {
+        SceneManager.LoadScene(0);
     }
 }
