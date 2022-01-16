@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
 
     [SerializeField] private GameObject overlayPanel;
-    [SerializeField] private GameObject pauseText;
+    [SerializeField] private GameObject pauseGroup;
     [SerializeField] private GameObject winText;
     [SerializeField] private GameObject loseText;
     [SerializeField] private GameObject buttons;
@@ -261,12 +261,12 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                pauseText.SetActive(true);
+                pauseGroup.SetActive(true);
             }
         }
         else
         {
-            pauseText.SetActive(false);
+            pauseGroup.SetActive(false);
             winText.SetActive(false);
             loseText.SetActive(false);
         }
