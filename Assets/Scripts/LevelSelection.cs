@@ -57,12 +57,17 @@ public class LevelSelection : MonoBehaviour
 
     public void OpenAgentSelect()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void SetSelectedLevel(int id)
     {
         selectedLevel = id;
         UpdateLevelText();
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

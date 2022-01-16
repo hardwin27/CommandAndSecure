@@ -295,13 +295,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitLevel()
     {
-        GameObject agentSelectionObject = GameObject.Find("AgentSelectionManager");
-        if(agentSelectionObject != null)
-        {
-            Destroy(agentSelectionObject);
-        }
-
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void RetryLevel()

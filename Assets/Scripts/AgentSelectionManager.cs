@@ -86,11 +86,11 @@ public class AgentSelectionManager : MonoBehaviour
             }
         }
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     public void BackToLevelSelect()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
