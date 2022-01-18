@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectDamageTile : Tile
+public class DamageOverTimeTile : Tile
 {
     public float dotDuration = 5f;
     public float dotDamage = 0.5f;

@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class EnemyCommanderDetector : MonoBehaviour
 {
-    private Enemy enemy;
-
-    private void Start()
-    {
-        enemy = transform.parent.GetComponent<Enemy>();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 6)
+        Enemy enemy = transform.parent.GetComponent<Enemy>();
+
+        if (collision.gameObject.layer == 6)
         {
             enemy.detectedCommander = collision.GetComponent<Commander>();
         }
@@ -21,6 +16,8 @@ public class EnemyCommanderDetector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        Enemy enemy = transform.parent.GetComponent<Enemy>();
+
         if (collision.gameObject.layer == 6)
         {
             enemy.detectedCommander = null;

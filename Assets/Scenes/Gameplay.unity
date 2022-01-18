@@ -2037,7 +2037,7 @@ MonoBehaviour:
   highgroundTilePrefab: {fileID: 7631882346082785958, guid: 2404da01df1f8f64fbc0921eeea5e771, type: 3}
   commanderTilePrefab: {fileID: 7631882346082785958, guid: 61e43fa636e740d47a674c6480ee5b92, type: 3}
   enemySpawnereTilePrefab: {fileID: 7631882346082785958, guid: 58e7bf656dbfb594a8b61a4746dd10bc, type: 3}
-  effectDamageTilePrefab: {fileID: 7631882346082785958, guid: ce38774ce073c1544a9d16d027a61c0e, type: 3}
+  damageOverTimeTilePrefab: {fileID: 7631882346082785958, guid: ce38774ce073c1544a9d16d027a61c0e, type: 3}
   doorTilePrefab: {fileID: 7631882346082785958, guid: 59172f1c29dff7f43b3db1275373574d, type: 3}
   commander: {fileID: 1910569566}
 --- !u!1 &1221658201

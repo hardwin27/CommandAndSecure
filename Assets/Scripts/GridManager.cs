@@ -26,7 +26,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject highgroundTilePrefab;
     [SerializeField] private GameObject commanderTilePrefab;
     [SerializeField] private GameObject enemySpawnereTilePrefab;
-    [SerializeField] private GameObject effectDamageTilePrefab;
+    [SerializeField] private GameObject damageOverTimeTilePrefab;
     [SerializeField] private GameObject doorTilePrefab;
 
     private Tile[,] tiles = new Tile[10, 10];
@@ -78,7 +78,7 @@ public class GridManager : MonoBehaviour
                             grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
                         break;
                     case "!":
-                        tempTile = Instantiate(effectDamageTilePrefab, 
+                        tempTile = Instantiate(damageOverTimeTilePrefab, 
                             grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
                         break;
                     case "?":

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 622057038077101488}
   - component: {fileID: 8976784078662307670}
   m_Layer: 3
-  m_Name: EffectDamageTile
+  m_Name: DamageOverTimeTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
