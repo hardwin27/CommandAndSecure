@@ -22,14 +22,14 @@ public class Agent : MonoBehaviour
 
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float shootInterval = 1;
-    [SerializeField] private float projectileSpeed = 5;
-    [SerializeField] private float projectileDamage = 2;
+    [SerializeField] private float shootInterval = 1f;
+    [SerializeField] private float projectileSpeed = 5f;
+    [SerializeField] private float projectileDamage = 2f;
     private float shootTimer;
 
     private bool isActive = false;
 
-     public HighgroundTile detectedHighgroundTile { get; private set; } = null;
+    public HighgroundTile detectedHighgroundTile { get; private set; } = null;
 
     public Vector2? placedPosition { get; private set; }
 
@@ -90,7 +90,10 @@ public class Agent : MonoBehaviour
         HighgroundTile tempTile = collision.GetComponent<HighgroundTile>();
         if(tempTile != null)
         {
-            detectedHighgroundTile = tempTile;
+            if(tempTile.GetPlacedAgent() == null)
+            {
+                detectedHighgroundTile = tempTile;
+            }
         }
     }
 
@@ -137,11 +140,6 @@ public class Agent : MonoBehaviour
     {
         return spriteRenderer.sprite;
     }
-
-    /*public void SetPlacedPosition(Vector2? newPosition)
-    {
-        placedPosition = newPosition;
-    }*/
 
     public void CheckPlacement()
     {

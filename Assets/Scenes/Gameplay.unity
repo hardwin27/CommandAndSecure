@@ -1393,7 +1393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085981cc64ee08b42b6f845d479525da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 1109220326}
   enemyPrefabs:
   - {fileID: 2662750216281134930, guid: 1627b34d889f2284d91866fc645b9c7e, type: 3}
   - {fileID: 5112005281289229249, guid: 6d2fba53a14e08240b237a96451a98e3, type: 3}
@@ -2036,7 +2035,7 @@ MonoBehaviour:
   lowgroundTilePrefab: {fileID: 7631882346082785958, guid: 0c5895a19aaca71438844eac342cdbf3, type: 3}
   highgroundTilePrefab: {fileID: 7631882346082785958, guid: 2404da01df1f8f64fbc0921eeea5e771, type: 3}
   commanderTilePrefab: {fileID: 7631882346082785958, guid: 61e43fa636e740d47a674c6480ee5b92, type: 3}
-  enemySpawnereTilePrefab: {fileID: 7631882346082785958, guid: 58e7bf656dbfb594a8b61a4746dd10bc, type: 3}
+  enemySpawnerTilePrefab: {fileID: 7631882346082785958, guid: 58e7bf656dbfb594a8b61a4746dd10bc, type: 3}
   damageOverTimeTilePrefab: {fileID: 7631882346082785958, guid: ce38774ce073c1544a9d16d027a61c0e, type: 3}
   doorTilePrefab: {fileID: 7631882346082785958, guid: 59172f1c29dff7f43b3db1275373574d, type: 3}
   commander: {fileID: 1910569566}

@@ -17,8 +17,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private GridManager gridManager;
-
     [SerializeField] private List<GameObject> enemyPrefabs;
     private int enemyAmount;
     private int enemyIndex = -1;
@@ -73,7 +71,7 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        gridManager.GetEnemySpawnTiles()[enemySpawnerIndex].SpawnEnemy(enemyPrefab, transform);
+        GridManager.Instance.GetEnemySpawnTiles()[enemySpawnerIndex].SpawnEnemy(enemyPrefab, transform);
         UpdateSelectedEnemy();
     }
 
