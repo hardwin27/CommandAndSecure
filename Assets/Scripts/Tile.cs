@@ -43,10 +43,10 @@ public class Tile : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
-        if (GameManager.Instance.GetIsPaused())
+        /*if (GameManager.Instance.GetIsPaused())
         {
             return;
-        }
+        }*/
     }
 
     public void AddNeighbor(Tile Tile)

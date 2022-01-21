@@ -88,13 +88,6 @@ public class Enemy : MonoBehaviour
 
     private void RotateCharacter()
     {
-        /*if(Vector3.Distance(transform.position, tilePosition) <= 0.1f)
-        {
-            isWalkToTile = false;
-            lookDirection = Vector3.zero;
-        }*/
-
-
         if (isWalkToTile)
         {
             if (Vector3.Distance(transform.position, tilePosition) <= 0.1f)

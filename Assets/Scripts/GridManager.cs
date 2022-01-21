@@ -300,7 +300,7 @@ public class GridManager : MonoBehaviour
         UpdateMap();
     }
 
-    public void ToogleDoorGroup(int groupId)
+    public void ToggleDoorGroup(int groupId)
     {
         List<DoorTile> tempDoors = new List<DoorTile>();
 

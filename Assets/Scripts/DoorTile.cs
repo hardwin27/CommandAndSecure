@@ -63,7 +63,7 @@ public class DoorTile : Tile
         base.OnMouseDown();
         if(canBeUsed)
         {
-            GridManager.Instance.ToogleDoorGroup(groupId);
+            GridManager.Instance.ToggleDoorGroup(groupId);
         }
     }
 

@@ -78,10 +78,13 @@ public class Agent : MonoBehaviour
 
         if(Input.GetMouseButtonUp(1))
         {
-            GameManager.Instance.AddPhoton(PhotonCost / 2);
-            GameManager.Instance.AddAgent(-1);
-            detectedHighgroundTile.SetPlacedAgent(null);
-            Destroy(gameObject);
+            if(isActive)
+            {
+                GameManager.Instance.AddPhoton(PhotonCost / 2);
+                GameManager.Instance.AddAgent(-1);
+                detectedHighgroundTile.SetPlacedAgent(null);
+                Destroy(gameObject);
+            }
         }
     }
 
