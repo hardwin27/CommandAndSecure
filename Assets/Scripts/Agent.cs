@@ -5,6 +5,7 @@ using UnityEngine;
 public class Agent : MonoBehaviour
 {
     private Rigidbody2D body;
+    private CircleCollider2D coll;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer enemyDetectionArea;
@@ -36,10 +37,13 @@ public class Agent : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        coll = GetComponent<CircleCollider2D>();
     }
 
     private void Start()
     {
+        Physics.queriesHitTriggers = true;
+        Physics2D.queriesHitTriggers = true;
         lookDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
         shootTimer = shootInterval;
     }
@@ -55,6 +59,8 @@ public class Agent : MonoBehaviour
         {
             return;
         }
+        coll.isTrigger = true;
+        coll.enabled = true;
 
         Shoot();
     }
@@ -69,17 +75,31 @@ public class Agent : MonoBehaviour
         RotateAgents();
     }
 
+    private void OnMouseEnter()
+    {
+        print("Enter");
+    }
+
+    private void OnMouseExit()
+    {
+        print("Exit");
+    }
+
     private void OnMouseOver()
     {
+        print("over");
         if (GameManager.Instance.GetIsPaused())
         {
             return;
         }
+        print("running");
 
         if (Input.GetMouseButtonUp(1))
         {
+            print("clicked");
             if (isActive)
             {
+                print("recalled");
                 GameManager.Instance.AddPhoton(PhotonCost / 2);
                 GameManager.Instance.AddAgent(-1);
                 gameObject.SetActive(false);

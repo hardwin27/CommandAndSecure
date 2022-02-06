@@ -138,9 +138,13 @@ public class Enemy : MonoBehaviour
         healthBar.value = health;
         if(health <= 0)
         {
-            GameManager.Instance.AddEnemyCounter(1);
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.AddEnemyCounter(1);
     }
 
     public void SetDoT(float duration, float damageValue)
