@@ -128,7 +128,8 @@ public class Enemy : MonoBehaviour
 
     public void ResetMovement()
     {
-        isWalkToTile = !isWalkToTile;
+        /*isWalkToTile = !isWalkToTile;*/
+        isWalkToTile = true;
     }
 
     public void TakingDamage(float damage)
