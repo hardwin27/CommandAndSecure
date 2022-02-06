@@ -75,31 +75,16 @@ public class Agent : MonoBehaviour
         RotateAgents();
     }
 
-    private void OnMouseEnter()
-    {
-        print("Enter");
-    }
-
-    private void OnMouseExit()
-    {
-        print("Exit");
-    }
-
     private void OnMouseOver()
     {
-        print("over");
         if (GameManager.Instance.GetIsPaused())
         {
             return;
         }
-        print("running");
-
         if (Input.GetMouseButtonUp(1))
         {
-            print("clicked");
             if (isActive)
             {
-                print("recalled");
                 GameManager.Instance.AddPhoton(PhotonCost / 2);
                 GameManager.Instance.AddAgent(-1);
                 gameObject.SetActive(false);
