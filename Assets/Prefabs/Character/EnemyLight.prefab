@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 419423872990667987, guid: 1627b34d889f2284d91866fc645b9c7e, type: 3}
       propertyPath: moveSpeed
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 419423872990667987, guid: 1627b34d889f2284d91866fc645b9c7e, type: 3}
       propertyPath: shootInterval

@@ -71,22 +71,24 @@ public class Agent : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if(GameManager.Instance.GetIsPaused())
+        if (GameManager.Instance.GetIsPaused())
         {
             return;
         }
 
-        if(Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1))
         {
-            if(isActive)
+            if (isActive)
             {
                 GameManager.Instance.AddPhoton(PhotonCost / 2);
                 GameManager.Instance.AddAgent(-1);
-                detectedHighgroundTile.SetPlacedAgent(null);
+                gameObject.SetActive(false);
                 Destroy(gameObject);
             }
         }
     }
+
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -102,7 +104,11 @@ public class Agent : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        detectedHighgroundTile = null;
+        HighgroundTile tempTile = collision.GetComponent<HighgroundTile>();
+        if(tempTile != null)
+        {
+            detectedHighgroundTile = null;
+        }
     }
 
     private void RotateAgents()
