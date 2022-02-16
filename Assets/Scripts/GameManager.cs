@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public Commander commander;
+
     public TextAsset databaseJson;
     private Database database;
 
@@ -53,12 +55,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float photonInterval = 1f;
     private float photonTimer;
 
+
     [SerializeField] private Camera mainCamera;
 
+    //Overlay related
     [SerializeField] private GameObject overlayPanel;
     [SerializeField] private GameObject pauseGroup;
-    [SerializeField] private GameObject winText;
+    [SerializeField] private GameObject winGroup;
     [SerializeField] private GameObject loseText;
+    [SerializeField] private GameObject ratingView;
+    [SerializeField] private Color ratingStarColor;
     [SerializeField] private GameObject buttons;
     private bool isPaused = false;
     private bool isGameOver = false;
@@ -252,7 +258,13 @@ public class GameManager : MonoBehaviour
             {
                 if (isWin)
                 {
-                    winText.SetActive(true);
+                    winGroup.SetActive(true);
+                    int rating = GetRating();
+                    Image[] ratingStars = ratingView.GetComponentsInChildren<Image>();
+                    for(int starIndex = 0; starIndex < rating; starIndex++)
+                    {
+                        ratingStars[starIndex].color = ratingStarColor;
+                    }
                 }
                 else
                 {
@@ -267,7 +279,7 @@ public class GameManager : MonoBehaviour
         else
         {
             pauseGroup.SetActive(false);
-            winText.SetActive(false);
+            winGroup.SetActive(false);
             loseText.SetActive(false);
         }
     }
@@ -278,6 +290,12 @@ public class GameManager : MonoBehaviour
         isWin = winStatus;
 
         SetIsPaused(true);
+    }
+
+    private int GetRating()
+    {
+        float percHealthRemaining = commander.GetRemainingHealthPercentage();
+        return Mathf.Clamp(Mathf.RoundToInt(percHealthRemaining / 0.25f), 1, 3);
     }
 
     public void SetCurrentSelectedAgent(AgentUI agentUI)

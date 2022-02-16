@@ -34,4 +34,9 @@ public class Commander : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public float GetRemainingHealthPercentage()
+    {
+        return health / maxHealth;
+    }
 }
