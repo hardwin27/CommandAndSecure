@@ -66,31 +66,52 @@ public class GridManager : MonoBehaviour
                 switch(GameManager.Instance.mapData[indX,indY])
                 {
                     case "#":
-                        tempTile =  Instantiate(highgroundTilePrefab, 
-                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile =  Instantiate(
+                            highgroundTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), 
+                            Quaternion.identity, 
+                            tilemap.transform);
                         break;
                     case "X":
-                        tempTile = Instantiate(enemySpawnerTilePrefab, 
-                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile = Instantiate(
+                            enemySpawnerTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), 
+                            Quaternion.identity, 
+                            tilemap.transform);
                         break;
                     case "V":
-                        tempTile = Instantiate(commanderTilePrefab, 
-                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile = Instantiate(
+                            commanderTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), 
+                            Quaternion.identity, 
+                            tilemap.transform);
                         break;
                     case "!":
-                        tempTile = Instantiate(damageOverTimeTilePrefab, 
-                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile = Instantiate(
+                            damageOverTimeTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), 
+                            Quaternion.identity, 
+                            tilemap.transform);
                         break;
                     case "?":
-                        tempTile = Instantiate(doorTilePrefab, 
-                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile = Instantiate(
+                            doorTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), 
+                            Quaternion.identity, 
+                            tilemap.transform);
                         break;
                     default:
-                        tempTile = Instantiate(lowgroundTilePrefab, 
-                            grid.WorldToCell(new Vector3(startX, startY, 0)), Quaternion.identity, tilemap.transform);
+                        tempTile = Instantiate(
+                            lowgroundTilePrefab, 
+                            grid.WorldToCell(new Vector3(startX, startY, 0)), 
+                            Quaternion.identity, 
+                            tilemap.transform);
                         break;
                 }
-                tempTile.transform.position = new Vector3(tempTile.transform.position.x - 0.5f, tempTile.transform.position.y + 0.5f, 0f);
+                tempTile.transform.position = new Vector3(
+                    tempTile.transform.position.x - 0.5f, 
+                    tempTile.transform.position.y + 0.5f, 
+                    0f);
                 startX += 1f;
             }
             startX = -4.5f;
@@ -154,8 +175,11 @@ public class GridManager : MonoBehaviour
 
     private void UpdateCurrentCommanderTile()
     {
-        tiles[commanderIndex.x, commanderIndex.y].GetComponent<CommanderTile>().SetIsCurrentCommanderPosition(true);
-        commander.transform.position = tiles[commanderIndex.x, commanderIndex.y].transform.position;
+        tiles[commanderIndex.x, commanderIndex.y].
+            GetComponent<CommanderTile>().
+            SetIsCurrentCommanderPosition(true);
+        commander.transform.position = 
+            tiles[commanderIndex.x, commanderIndex.y].transform.position;
     }
 
     public List<EnemySpawnerTile> GetEnemySpawnTiles()
@@ -251,7 +275,8 @@ public class GridManager : MonoBehaviour
                         //left
                         if (tiles[indX - 1, indY].GetIsLowground())
                         {
-                            distanceLeft = tiles[indX - 1, indY].GetDistance() - tiles[indX, indY].GetDistance();
+                            distanceLeft = tiles[indX - 1, indY].GetDistance() - 
+                                tiles[indX, indY].GetDistance();
                         }
                     }
                     if (indX < 10 - 1)
@@ -259,7 +284,8 @@ public class GridManager : MonoBehaviour
                         //right
                         if (tiles[indX + 1, indY].GetIsLowground())
                         {
-                            distanceRight = tiles[indX + 1, indY].GetDistance() - tiles[indX, indY].GetDistance();
+                            distanceRight = tiles[indX + 1, indY].GetDistance() - 
+                                tiles[indX, indY].GetDistance();
                         }
                     }
                     if (indY > 0)
@@ -267,7 +293,8 @@ public class GridManager : MonoBehaviour
                         //down
                         if (tiles[indX, indY - 1].GetIsLowground())
                         {
-                            distanceDown = tiles[indX, indY - 1].GetDistance() - tiles[indX, indY].GetDistance();
+                            distanceDown = tiles[indX, indY - 1].GetDistance() - 
+                                tiles[indX, indY].GetDistance();
                         }
                     }
                     if (indY < 10 - 1)
@@ -275,11 +302,16 @@ public class GridManager : MonoBehaviour
                         //up
                         if (tiles[indX, indY + 1].GetIsLowground())
                         {
-                            distanceUp = tiles[indX, indY + 1].GetDistance() - tiles[indX, indY].GetDistance();
+                            distanceUp = tiles[indX, indY + 1].GetDistance() - 
+                                tiles[indX, indY].GetDistance();
                         }
                     }
                     
-                    tiles[indX, indY].SetDirection(distanceLeft, distanceRight, distanceUp, distanceDown);
+                    tiles[indX, indY].SetDirection(
+                        distanceLeft, 
+                        distanceRight, 
+                        distanceUp, 
+                        distanceDown);
                     
                 }
             }
@@ -295,7 +327,9 @@ public class GridManager : MonoBehaviour
 
     public void ChangeCommanderTile(Vector2Int newIndex)
     {
-        tiles[commanderIndex.x, commanderIndex.y].GetComponent<CommanderTile>().SetIsCurrentCommanderPosition(false);
+        tiles[commanderIndex.x, commanderIndex.y]
+            .GetComponent<CommanderTile>()
+            .SetIsCurrentCommanderPosition(false);
         commanderIndex = newIndex;
         UpdateMap();
     }

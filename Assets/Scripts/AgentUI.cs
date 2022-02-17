@@ -36,9 +36,12 @@ public class AgentUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             return;
         }
 
-        if (GameManager.Instance.photonAmount >= agent.PhotonCost && GameManager.Instance.GetIfCanSpawnAgent())
+        if (GameManager.Instance.photonAmount >= 
+            agent.PhotonCost && GameManager.Instance.GetIfCanSpawnAgent())
         {
-            GameObject newAgentObj = Instantiate(agent.gameObject, GameManager.Instance.GetAgentParent());
+            GameObject newAgentObj = Instantiate(
+                agent.gameObject, 
+                GameManager.Instance.GetAgentParent());
             currentSelectedAgent = newAgentObj.GetComponent<Agent>();
             currentSelectedAgent.ToggleOrderInLayer(true);
             isDragging = true;

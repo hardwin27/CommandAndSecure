@@ -90,14 +90,17 @@ public class Enemy : MonoBehaviour
     {
         if (isWalkToTile)
         {
-            if (Vector3.Distance(transform.position, tilePosition) <= 0.1f)
+            if (Vector3.Distance(
+                transform.position, 
+                tilePosition) <= 0.1f)
             {
                 isWalkToTile = false;
                 lookDirection = Vector3.zero;
             }
             else
             {
-                lookDirection = tilePosition - transform.position;
+                lookDirection = tilePosition - 
+                    transform.position;
             }
         }
         else
@@ -108,7 +111,8 @@ public class Enemy : MonoBehaviour
         if (lookDirection != Vector3.zero)
         {
             lookDirection.Normalize();
-            angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+            angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * 
+                Mathf.Rad2Deg;
             visual.rotation = Quaternion.Euler(0f,0f, angle);
         }
 
@@ -117,7 +121,10 @@ public class Enemy : MonoBehaviour
 
     private void MoveCharacter()
     {
-        body.MovePosition((Vector2)transform.position + (moveDirection * moveSpeed * Time.fixedDeltaTime));
+        body.MovePosition((Vector2)transform.position + 
+            (moveDirection * 
+            moveSpeed * 
+            Time.fixedDeltaTime));
     }
 
     public void SetNewTileTarget(Vector3 pos)
@@ -180,9 +187,11 @@ public class Enemy : MonoBehaviour
 
     private void LookToCommander()
     {
-        lookDirection = detectedCommander.transform.position - transform.position;
+        lookDirection = detectedCommander.transform.position - 
+            transform.position;
         lookDirection.Normalize();
-        angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(lookDirection.y, lookDirection.x) *
+            Mathf.Rad2Deg;
         visual.rotation = Quaternion.Euler(0f, 0f, angle);
         lookDirection.Normalize();
     }
@@ -204,7 +213,10 @@ public class Enemy : MonoBehaviour
                 shootTimer = shootInterval;
                 GameObject projectile = Instantiate(projectilePrefab);
                 projectile.transform.position = firePoint.position;
-                projectile.GetComponent<Projectile>().SetProperty(detectedCommander.transform, projectileSpeed, projectileDamage);
+                projectile.GetComponent<Projectile>().SetProperty(
+                    detectedCommander.transform, 
+                    projectileSpeed, 
+                    projectileDamage);
             }
         }
     }

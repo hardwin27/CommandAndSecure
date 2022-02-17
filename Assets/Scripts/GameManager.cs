@@ -152,7 +152,9 @@ public class GameManager : MonoBehaviour
 
         foreach (Agent agent in agents)
         {
-            GameObject newAgentObj = Instantiate(agentUIPrefab.gameObject, agentUIParent);
+            GameObject newAgentObj = Instantiate(
+                agentUIPrefab.gameObject, agentUIParent
+                );
             AgentUI newAgentUI = newAgentObj.GetComponent<AgentUI>();
 
             newAgentUI.SetAgent(agent);

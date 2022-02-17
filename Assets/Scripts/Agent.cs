@@ -120,10 +120,12 @@ public class Agent : MonoBehaviour
     {
         if(detectedEnemies.Count > 0)
         {
-            lookDirection = detectedEnemies[0].position - transform.position;
+            lookDirection = detectedEnemies[0].position - 
+                transform.position;
         }
 
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * 
+            Mathf.Rad2Deg;
         body.rotation = angle;
         lookDirection.Normalize();
     }
@@ -145,7 +147,10 @@ public class Agent : MonoBehaviour
                 shootTimer = shootInterval;
                 GameObject projectile = Instantiate(projectilePrefab);
                 projectile.transform.position = firePoint.position;
-                projectile.GetComponent<Projectile>().SetProperty(detectedEnemies[0].transform, projectileSpeed, projectileDamage);
+                projectile.GetComponent<Projectile>().SetProperty(
+                    detectedEnemies[0].transform, 
+                    projectileSpeed, 
+                    projectileDamage);
             }
         }
     }
